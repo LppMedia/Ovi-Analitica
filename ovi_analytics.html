@@ -707,6 +707,193 @@
     .opp-impact.muy-alto   { background: rgba(245,158,11,0.18); color: #fbbf24; border: 1px solid rgba(245,158,11,0.35); }
     .opp-impact.medio-alto { background: rgba(16,185,129,0.15); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.3); }
 
+    /* ======================== OPP EXPANDED ======================== */
+    .opp-context {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 16px;
+      padding: 12px 14px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 8px;
+      border-left: 3px solid rgba(255,255,255,0.1);
+    }
+    .opp-steps-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--dim);
+      margin: 16px 0 8px;
+    }
+    .opp-steps {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .opp-steps li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .opp-step-num {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.07);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--muted);
+      margin-top: 1px;
+    }
+    .opp-kpis {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .opp-kpi {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 12px;
+    }
+    .opp-kpi-val {
+      font-size: 16px;
+      font-weight: 800;
+      color: #fff;
+      display: block;
+      line-height: 1.2;
+    }
+    .opp-kpi-label {
+      color: var(--dim);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 2px;
+      display: block;
+    }
+    .opp-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+    .opp-timeline {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      color: var(--muted);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .opp-priority {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .opp-priority.p1 { background: rgba(239,68,68,0.15); color: #fca5a5; border: 1px solid rgba(239,68,68,0.3); }
+    .opp-priority.p2 { background: rgba(245,158,11,0.15); color: #fbbf24; border: 1px solid rgba(245,158,11,0.3); }
+    .opp-priority.p3 { background: rgba(99,102,241,0.15); color: #a5b4fc; border: 1px solid rgba(99,102,241,0.3); }
+    .opp-tools {
+      font-size: 11px;
+      color: var(--dim);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+    .opp-tool-tag {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 4px;
+      padding: 2px 7px;
+      font-size: 10px;
+      color: var(--dim);
+    }
+
+    /* ======================== ROADMAP ======================== */
+    .roadmap-section { margin-top: 16px; }
+    .roadmap-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 900px) { .roadmap-grid { grid-template-columns: 1fr; } }
+    .roadmap-phase {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+    }
+    .roadmap-phase-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--dim);
+      margin-bottom: 6px;
+    }
+    .roadmap-phase-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+    .roadmap-item {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .roadmap-item:last-child { border-bottom: none; }
+    .roadmap-dot {
+      flex-shrink: 0;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-top: 5px;
+    }
+    .dot-red { background: #ef4444; }
+    .dot-amber { background: #f59e0b; }
+    .dot-green { background: #10b981; }
+    .roadmap-phase-kpi {
+      margin-top: 16px;
+      padding: 12px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 10px;
+      text-align: center;
+    }
+    .roadmap-phase-kpi-val {
+      font-size: 22px;
+      font-weight: 900;
+      color: #fff;
+    }
+    .roadmap-phase-kpi-label {
+      font-size: 11px;
+      color: var(--dim);
+      margin-top: 2px;
+    }
+
     /* ======================== FOOTER ======================== */
     .footer {
       padding: 48px 0 40px;
@@ -1182,115 +1369,340 @@
   <!-- ======================== OPPORTUNITIES ======================== -->
   <section class="fade-in fade-in-5">
     <div class="section-label">Estrategia de Crecimiento</div>
-    <div class="section-title">Oportunidades de <span class="accent">Crecimiento</span></div>
+    <div class="section-title">Oportunidades de <span class="accent">Crecimiento</span> Detalladas</div>
     <div class="opps-grid">
 
-      <!-- Card 1: TikTok Verification -->
-      <div class="opp-card accent-blue">
-        <div class="opp-header">
-          <span class="opp-category-tag blue">Credibilidad</span>
-          <span class="opp-icon-wrap">🔵</span>
-        </div>
-        <div class="opp-title">Verificación en TikTok</div>
-        <ul class="opp-bullets">
-          <li>Tiene 3.1M de seguidores — muy por encima del umbral de verificación de TikTok</li>
-          <li>La verificación aumenta la confianza del público y mejora el posicionamiento en el algoritmo</li>
-          <li>Permite acceso a herramientas exclusivas: TikTok Creator Marketplace, paneles de analítica avanzada</li>
-          <li>Solicitar verificación directamente desde la app en Configuración → Cuenta → Verificación</li>
-        </ul>
-        <div class="opp-footer">
-          <span class="opp-impact alto">Impacto: Alto</span>
-        </div>
-      </div>
-
-      <!-- Card 2: YouTube Verification -->
+      <!-- ===== OPP 1: YouTube Shorts ===== -->
       <div class="opp-card accent-red">
         <div class="opp-header">
-          <span class="opp-category-tag red">Credibilidad</span>
-          <span class="opp-icon-wrap">🔴</span>
-        </div>
-        <div class="opp-title">Verificación en YouTube</div>
-        <ul class="opp-bullets">
-          <li>723K suscriptores — ya cumple el requisito de 100K para la verificación de canal</li>
-          <li>La insignia aumenta el CTR (tasa de clics) en resultados de búsqueda y recomendaciones</li>
-          <li>Permite publicar videos de más de 15 minutos sin restricciones adicionales</li>
-          <li>Verificar en studio.youtube.com → Configuración del canal → Elegibilidad del canal</li>
-        </ul>
-        <div class="opp-footer">
-          <span class="opp-impact alto">Impacto: Alto</span>
-        </div>
-      </div>
-
-      <!-- Card 3: Facebook Ads -->
-      <div class="opp-card accent-gold">
-        <div class="opp-header">
-          <span class="opp-category-tag gold">Monetización</span>
-          <span class="opp-icon-wrap">💰</span>
-        </div>
-        <div class="opp-title">Activar Campañas de Publicidad en Facebook</div>
-        <ul class="opp-bullets">
-          <li>Actualmente no corre ningún anuncio — oportunidad directa de amplificar sus lanzamientos</li>
-          <li>Con 414K seguidores, una campaña de conversión a Spotify/Apple Music puede tener costo por clic muy bajo</li>
-          <li>Retargeting a fans de páginas similares (Bad Bunny, Anuel AA, Myke Towers) en el mercado hispano</li>
-          <li>Presupuesto inicial sugerido: $500–$1,000 USD por lanzamiento de sencillo para medir ROAS</li>
-        </ul>
-        <div class="opp-footer">
-          <span class="opp-impact muy-alto">Impacto: Muy Alto</span>
-        </div>
-      </div>
-
-      <!-- Card 4: YouTube Shorts -->
-      <div class="opp-card accent-green">
-        <div class="opp-header">
-          <span class="opp-category-tag green">Contenido</span>
+          <span class="opp-category-tag red">🔥 Urgente</span>
           <span class="opp-icon-wrap">📱</span>
         </div>
-        <div class="opp-title">YouTube Shorts — Canal sin Explotar</div>
-        <ul class="opp-bullets">
-          <li>De 43 videos en el canal, cero son Shorts — formato con mayor alcance orgánico en YouTube actualmente</li>
-          <li>Sus clips virales de TikTok (ej: "Pinche alíen" con 18M reproducciones) se pueden reutilizar directamente como Shorts</li>
-          <li>Los Shorts tienen mayor probabilidad de aparecer en la pestaña "Explorar" y atraer suscriptores nuevos</li>
-          <li>Meta sugerida: publicar 3–5 Shorts por semana durante 60 días para activar el algoritmo de distribución</li>
+        <div class="opp-title">YouTube Shorts — El Canal sin Explotar más Grande</div>
+        <div class="opp-context">
+          OVI tiene <strong style="color:#fff">43 videos en YouTube con 460M+ vistas</strong>, pero <strong style="color:#fca5a5">CERO Shorts publicados</strong>. YouTube actualmente prioriza los Shorts en su algoritmo de distribución, ofreciendo el mayor alcance orgánico gratuito disponible. Cada TikTok viral puede reciclarse como Short en menos de 5 minutos.
+        </div>
+        <div class="opp-steps-title">📋 Plan de Acción Paso a Paso</div>
+        <ul class="opp-steps">
+          <li><span class="opp-step-num">1</span>Auditar los 153 TikToks existentes e identificar los 20 clips con mejor ratio engagement/duración (menos de 60 seg.)</li>
+          <li><span class="opp-step-num">2</span>Retirar el watermark de TikTok usando SnapTik o CapCut y añadir subtítulos en español e inglés para ambos mercados</li>
+          <li><span class="opp-step-num">3</span>Publicar 1 Short diario durante las primeras 2 semanas para activar el algoritmo de distribución de Shorts</li>
+          <li><span class="opp-step-num">4</span>Optimizar títulos con palabras clave: nombre del artista + nombre de la canción + género (ej: "OVI - Rockstar #reggaeton #musiclatina")</li>
+          <li><span class="opp-step-num">5</span>Usar el panel de YouTube Analytics para identificar qué Shorts generan suscriptores nuevos vs. solo vistas, y duplicar ese formato</li>
+          <li><span class="opp-step-num">6</span>Crear Shorts exclusivos de behind-the-scenes, reacciones a comentarios y "retos" para generar contenido original que no está en TikTok</li>
         </ul>
-        <div class="opp-footer">
+        <div class="opp-kpis">
+          <div class="opp-kpi"><span class="opp-kpi-val">+200K</span><span class="opp-kpi-label">Suscriptores en 90 días</span></div>
+          <div class="opp-kpi"><span class="opp-kpi-val">50M+</span><span class="opp-kpi-label">Vistas adicionales / mes</span></div>
+          <div class="opp-kpi"><span class="opp-kpi-val">$0</span><span class="opp-kpi-label">Inversión requerida</span></div>
+        </div>
+        <div class="opp-tools">🛠 Herramientas: <span class="opp-tool-tag">CapCut</span><span class="opp-tool-tag">YouTube Studio</span><span class="opp-tool-tag">SnapTik</span><span class="opp-tool-tag">TubeBuddy</span></div>
+        <div class="opp-meta">
           <span class="opp-impact muy-alto">Impacto: Muy Alto</span>
+          <span class="opp-priority p1">⚡ Prioridad #1</span>
+          <span class="opp-timeline">⏱ Semanas 1–12</span>
         </div>
       </div>
 
-      <!-- Card 5: Collaborations -->
+      <!-- ===== OPP 2: Facebook Ads ===== -->
+      <div class="opp-card accent-gold">
+        <div class="opp-header">
+          <span class="opp-category-tag gold">💰 Monetización</span>
+          <span class="opp-icon-wrap">🎯</span>
+        </div>
+        <div class="opp-title">Campañas de Meta Ads para Amplificar Lanzamientos</div>
+        <div class="opp-context">
+          OVI tiene <strong style="color:#fff">414K seguidores en Facebook y 3.3M en Instagram</strong> pero actualmente <strong style="color:#fbbf24">no corre ningún anuncio pagado</strong>. El mercado hispano en Meta (EE.UU. + LATAM) es uno de los más baratos por CPM con altísima afinidad musical. Cada lanzamiento de sencillo sin publicidad pierde entre el 60–80% de su alcance potencial.
+        </div>
+        <div class="opp-steps-title">📋 Plan de Campaña por Lanzamiento</div>
+        <ul class="opp-steps">
+          <li><span class="opp-step-num">1</span><strong style="color:#fff">Pre-lanzamiento (72h antes):</strong> Campaña de Awareness con el teaser del sencillo. Objetivo: alcance máximo. Presupuesto: $200 USD. Audiencia: fans similares a Bad Bunny, Anuel AA, Myke Towers, 18–35 años, EE.UU. + MX + CO + PR.</li>
+          <li><span class="opp-step-num">2</span><strong style="color:#fff">Día de lanzamiento:</strong> Campaña de Conversión hacia Spotify/Apple Music o YouTube. Presupuesto: $300 USD. Formato: Reel de 15 seg + CTA "Escúchalo ahora".</li>
+          <li><span class="opp-step-num">3</span><strong style="color:#fff">Semana 1–2 post-lanzamiento:</strong> Retargeting a quienes interactuaron con el video pero no hicieron clic. Presupuesto: $200 USD. CPC objetivo: menos de $0.15 USD.</li>
+          <li><span class="opp-step-num">4</span>Instalar el Meta Pixel en el sitio web/Linktree de OVI para medir conversiones y construir audiencias Custom desde fans reales.</li>
+          <li><span class="opp-step-num">5</span>Crear una Lookalike Audience del 1% basada en los seguidores más activos de la página de Facebook para escalar campaigns futuras.</li>
+        </ul>
+        <div class="opp-kpis">
+          <div class="opp-kpi"><span class="opp-kpi-val">5–8x</span><span class="opp-kpi-label">ROAS estimado en streams</span></div>
+          <div class="opp-kpi"><span class="opp-kpi-val">$0.08</span><span class="opp-kpi-label">CPM hispano estimado</span></div>
+          <div class="opp-kpi"><span class="opp-kpi-val">$700</span><span class="opp-kpi-label">Budget por lanzamiento</span></div>
+        </div>
+        <div class="opp-tools">🛠 Herramientas: <span class="opp-tool-tag">Meta Ads Manager</span><span class="opp-tool-tag">Meta Business Suite</span><span class="opp-tool-tag">Meta Pixel</span><span class="opp-tool-tag">Canva Ads</span></div>
+        <div class="opp-meta">
+          <span class="opp-impact muy-alto">Impacto: Muy Alto</span>
+          <span class="opp-priority p1">⚡ Prioridad #2</span>
+          <span class="opp-timeline">⏱ Por cada lanzamiento</span>
+        </div>
+      </div>
+
+      <!-- ===== OPP 3: Colaboraciones ===== -->
       <div class="opp-card accent-purple">
         <div class="opp-header">
-          <span class="opp-category-tag purple">Crecimiento</span>
-          <span class="opp-icon-wrap">🤝</span>
+          <span class="opp-category-tag purple">🤝 Crecimiento</span>
+          <span class="opp-icon-wrap">🌍</span>
         </div>
-        <div class="opp-title">Estrategia de Colaboraciones Estructurada</div>
-        <ul class="opp-bullets">
-          <li>Sus videos con más vistas son TODOS colaboraciones: Rockstar (31M), A Los 16 (24M), HALLANDALE (16M)</li>
-          <li>No existe una cadencia regular de collabs — se pueden planificar lanzamientos trimestrales con artistas de México, Colombia y Argentina</li>
-          <li>Expandir a mercados no explorados: España, Miami bilingüe, comunidad brasileña con artistas crossover</li>
-          <li>Crear "Episodios de Colaboración" como contenido de serie en Instagram/TikTok para generar anticipación</li>
+        <div class="opp-title">Mapa de Colaboraciones Estratégico por Mercado</div>
+        <div class="opp-context">
+          El 100% de los videos con más de 10M de vistas en YouTube son colaboraciones. <strong style="color:#fff">"Los Rockstar No Van al Cielo" (31M), "A Los 16" (24M) y "HALLANDALE" (16M)</strong> son todos features. Sin embargo, no existe una cadencia planificada: las collabs ocurren de forma oportunista. Una estrategia trimestral por mercado puede duplicar el alcance en 12 meses.
+        </div>
+        <div class="opp-steps-title">📋 Roadmap de Colaboraciones por Región</div>
+        <ul class="opp-steps">
+          <li><span class="opp-step-num">1</span><strong style="color:#fff">Q2 2026 — México:</strong> Artista objetivo con 5M–15M de seguidores en un género complementario (trap mexicano, corridos tumbados). Formato: sencillo + serie de contenido de "proceso creativo" en Instagram Stories y TikTok (3 episodios).</li>
+          <li><span class="opp-step-num">2</span><strong style="color:#fff">Q3 2026 — Colombia/Argentina:</strong> Colaboración con artista urbano emergente del género bienechor o RKT. Aprovechar el algoritmo de Spotify que impulsa collabs entre artistas de países distintos.</li>
+          <li><span class="opp-step-num">3</span><strong style="color:#fff">Q4 2026 — Mercado Bilingüe (EE.UU.):</strong> Feature con artista de Miami o Nueva York que mezcle español e inglés. Objetivo: posicionarse en playlists de Spotify US y Apple Music US.</li>
+          <li><span class="opp-step-num">4</span>Para cada collab, crear contenido de "anticipación": countdown en Instagram Stories, videos de estudio en TikTok, live conjunto de anuncio en Facebook.</li>
+          <li><span class="opp-step-num">5</span>Negociar con los artistas colaboradores que publiquen el contenido simultáneamente en sus cuentas para maximalizar el intercambio de audiencias.</li>
         </ul>
-        <div class="opp-footer">
-          <span class="opp-impact alto">Impacto: Alto</span>
+        <div class="opp-kpis">
+          <div class="opp-kpi"><span class="opp-kpi-val">+500K</span><span class="opp-kpi-label">Seguidores nuevos / collab</span></div>
+          <div class="opp-kpi"><span class="opp-kpi-val">20M+</span><span class="opp-kpi-label">Streams Spotify estimados</span></div>
+          <div class="opp-kpi"><span class="opp-kpi-val">3</span><span class="opp-kpi-label">Collabs objetivo por año</span></div>
+        </div>
+        <div class="opp-tools">🛠 Herramientas: <span class="opp-tool-tag">Spotify for Artists</span><span class="opp-tool-tag">TuneCore</span><span class="opp-tool-tag">DistroKid</span><span class="opp-tool-tag">Chartmetric</span></div>
+        <div class="opp-meta">
+          <span class="opp-impact muy-alto">Impacto: Muy Alto</span>
+          <span class="opp-priority p1">⚡ Prioridad #3</span>
+          <span class="opp-timeline">⏱ Trimestral / 12 meses</span>
         </div>
       </div>
 
-      <!-- Card 6: Facebook Community -->
+      <!-- ===== OPP 4: YouTube Monetización ===== -->
+      <div class="opp-card accent-red">
+        <div class="opp-header">
+          <span class="opp-category-tag red">💸 Revenue</span>
+          <span class="opp-icon-wrap">▶️</span>
+        </div>
+        <div class="opp-title">Monetización Avanzada de YouTube — 5 Fuentes de Ingreso</div>
+        <div class="opp-context">
+          Con <strong style="color:#fff">460M+ de vistas totales y 723K suscriptores</strong>, el canal de OVI está generando ingresos, pero probablemente solo por AdSense básico. Existen 4 fuentes adicionales de monetización de YouTube completamente disponibles con su tamaño de canal que podrían triplicar el ingreso por plataforma.
+        </div>
+        <div class="opp-steps-title">📋 Las 5 Fuentes de Monetización</div>
+        <ul class="opp-steps">
+          <li><span class="opp-step-num">1</span><strong style="color:#fff">YouTube AdSense (activo):</strong> Estimado actual $9,200–$13,800 USD/mes con 460M vistas acumuladas y CPM de $1.5–$3 para contenido musical hispano. Optimizar con mid-roll ads en videos de +8 minutos.</li>
+          <li><span class="opp-step-num">2</span><strong style="color:#fff">Canal de Membresías:</strong> Activar "Únete al Canal" desde YouTube Studio. Crear 3 niveles: Fan ($/1.99 USD), VIP ($/4.99 USD), Backstage ($/9.99 USD) con perks exclusivos: emojis personalizados, insignias, contenido anticipado, lives privados mensuales.</li>
+          <li><span class="opp-step-num">3</span><strong style="color:#fff">Super Thanks / Super Chats:</strong> Activar donaciones en videos y transmisiones en vivo. Los artistas musicales reciben en promedio $500–$2,000 USD por live con audiencia de 5K+ viewers.</li>
+          <li><span class="opp-step-num">4</span><strong style="color:#fff">YouTube Shopping:</strong> Conectar tienda de merchandise (camisetas, hoodies, gorras con logo OVI) directamente al canal. La tienda aparece debajo de cada video como botón de compra.</li>
+          <li><span class="opp-step-num">5</span><strong style="color:#fff">YouTube BrandConnect:</strong> Registrarse en YouTube BrandConnect para recibir propuestas de patrocinio de marcas que buscan artistas latinos. Con 723K suscriptores el rate card puede ser $5,000–$15,000 USD por integración.</li>
+        </ul>
+        <div class="opp-kpis">
+          <div class="opp-kpi"><span class="opp-kpi-val">$25K+</span><span class="opp-kpi-label">Revenue mensual estimado</span></div>
+          <div class="opp-kpi"><span class="opp-kpi-val">3x</span><span class="opp-kpi-label">Multiplicador vs. AdSense solo</span></div>
+          <div class="opp-kpi"><span class="opp-kpi-val">5</span><span class="opp-kpi-label">Fuentes de ingreso activas</span></div>
+        </div>
+        <div class="opp-tools">🛠 Herramientas: <span class="opp-tool-tag">YouTube Studio</span><span class="opp-tool-tag">YouTube BrandConnect</span><span class="opp-tool-tag">Printful</span><span class="opp-tool-tag">Spreadshop</span></div>
+        <div class="opp-meta">
+          <span class="opp-impact muy-alto">Impacto: Muy Alto</span>
+          <span class="opp-priority p2">🔶 Prioridad #4</span>
+          <span class="opp-timeline">⏱ Semanas 2–6</span>
+        </div>
+      </div>
+
+      <!-- ===== OPP 5: TikTok Verificación + Creator Marketplace ===== -->
       <div class="opp-card accent-teal">
         <div class="opp-header">
-          <span class="opp-category-tag teal">Engagement</span>
-          <span class="opp-icon-wrap">📊</span>
+          <span class="opp-category-tag teal">✓ Credibilidad</span>
+          <span class="opp-icon-wrap">🎵</span>
         </div>
-        <div class="opp-title">Facebook — Reactivar la Comunidad</div>
-        <ul class="opp-bullets">
-          <li>414K seguidores con engagement potencialmente dormido — no se detectó actividad publicitaria reciente</li>
-          <li>Facebook sigue siendo la plataforma #1 para el segmento 35–55 años en Latinoamérica y entre hispanos en EE.UU.</li>
-          <li>Publicar detrás de cámaras, lives de sesiones de estudio, Q&amp;A en grupos cerrados para reactivar la comunidad</li>
-          <li>Integrar Facebook con Instagram mediante publicaciones cruzadas automáticas desde Meta Business Suite</li>
-          <li>Meta de engagement: de 28K hablando actualmente → objetivo de 60K en 90 días</li>
+        <div class="opp-title">TikTok: Verificación + Creator Marketplace + LIVE Gifts</div>
+        <div class="opp-context">
+          Con <strong style="color:#fff">3.1M de seguidores y 42.7M de corazones</strong>, OVI está muy por encima del umbral de verificación de TikTok. La falta del check azul reduce la credibilidad frente a nuevos seguidores y limita el acceso al TikTok Creator Marketplace, donde las marcas pagan entre $2,000–$20,000 USD por integración a artistas de su tamaño.
+        </div>
+        <div class="opp-steps-title">📋 Plan de Acción en TikTok</div>
+        <ul class="opp-steps">
+          <li><span class="opp-step-num">1</span><strong style="color:#fff">Solicitar verificación:</strong> Ir a Perfil → Configuración → Cuenta → Solicitar verificación. Incluir links a perfiles verificados de Instagram y Wikipedia. El proceso toma 30 días. Si se rechaza, esperar 30 días y volver a aplicar con más evidencia de presencia en medios.</li>
+          <li><span class="opp-step-num">2</span><strong style="color:#fff">Registrarse en TikTok Creator Marketplace:</strong> En creator.tiktok.com, crear perfil de marca con kit de medios, estadísticas de audiencia y nichos de contenido. Las marcas de moda, bebidas y gaming pagan más a artistas latinos de ese rango.</li>
+          <li><span class="opp-step-num">3</span><strong style="color:#fff">Activar TikTok LIVE estratégico:</strong> Programar 2 lives por semana (martes y jueves, 8–10pm ET que es el horario pico del mercado hispano de EE.UU.). Los LIVE Gifts generan ingreso directo en Diamond coins que se convierten a dólares.</li>
+          <li><span class="opp-step-num">4</span><strong style="color:#fff">TikTok Series (contenido premium):</strong> Crear una serie de videos de pago dentro de TikTok ($1.99–$4.99 USD) con contenido exclusivo: sesiones de estudio, tutoriales de producción, historias detrás de las canciones.</li>
+          <li><span class="opp-step-num">5</span>Usar TikTok Analytics para identificar los días y horas de mayor engagement de @ovi_oficial y ajustar el calendario de publicación para maximizar el alcance orgánico del FYP.</li>
         </ul>
-        <div class="opp-footer">
+        <div class="opp-kpis">
+          <div class="opp-kpi"><span class="opp-kpi-val">$8K+</span><span class="opp-kpi-label">Revenue mensual TikTok</span></div>
+          <div class="opp-kpi"><span class="opp-kpi-val">+40%</span><span class="opp-kpi-label">Boost en CTR post-verificación</span></div>
+          <div class="opp-kpi"><span class="opp-kpi-val">3.1M</span><span class="opp-kpi-label">Seguidores elegibles</span></div>
+        </div>
+        <div class="opp-tools">🛠 Herramientas: <span class="opp-tool-tag">TikTok Creator Marketplace</span><span class="opp-tool-tag">TikTok Studio</span><span class="opp-tool-tag">TikTok Analytics</span></div>
+        <div class="opp-meta">
+          <span class="opp-impact alto">Impacto: Alto</span>
+          <span class="opp-priority p2">🔶 Prioridad #5</span>
+          <span class="opp-timeline">⏱ Semanas 1–4</span>
+        </div>
+      </div>
+
+      <!-- ===== OPP 6: YouTube Verificación ===== -->
+      <div class="opp-card accent-red">
+        <div class="opp-header">
+          <span class="opp-category-tag red">✓ Credibilidad</span>
+          <span class="opp-icon-wrap">▶</span>
+        </div>
+        <div class="opp-title">Verificación de Canal YouTube + Custom URL + Playlists SEO</div>
+        <div class="opp-context">
+          Con <strong style="color:#fff">723K suscriptores</strong>, OVI supera el umbral de 100K requerido para la verificación de canal en YouTube. Sin la insignia de verificación, los usuarios que buscan el canal pueden confundirlo con cuentas fan o impersonators, perdiendo suscriptores legítimos. Además, la URL personalizada no está optimizada para SEO.
+        </div>
+        <div class="opp-steps-title">📋 Pasos de Verificación y Optimización</div>
+        <ul class="opp-steps">
+          <li><span class="opp-step-num">1</span><strong style="color:#fff">Verificar el canal:</strong> Ir a studio.youtube.com → Configuración → Canal → Elegibilidad del canal → Solicitar verificación. Requiere +100K suscriptores (cumplido) y número de teléfono válido para SMS.</li>
+          <li><span class="opp-step-num">2</span><strong style="color:#fff">Configurar Custom URL:</strong> Cambiar la URL del canal a youtube.com/@ovi_oficial (verificar si está disponible) para unificar el handle con TikTok e Instagram. Esto mejora el SEO en búsquedas de Google.</li>
+          <li><span class="opp-step-num">3</span><strong style="color:#fff">Crear playlists temáticas SEO:</strong> Organizar los 43 videos en playlists: "OVI Éxitos", "OVI Colaboraciones", "OVI Acústico / Behind The Scenes", "OVI Letras Oficiales". Las playlists aparecen en Google Search y aumentan el watch time.</li>
+          <li><span class="opp-step-num">4</span><strong style="color:#fff">Optimizar descripciones con keywords:</strong> Revisar los 8 videos con más vistas y añadir en la descripción: nombre del artista, nombre de la canción, género, año, y links a Spotify/Apple Music. Esto mejora el posicionamiento en YouTube Search.</li>
+          <li><span class="opp-step-num">5</span>Añadir end screens y cards en cada video para hacer cross-promotion entre videos relacionados. Esto puede aumentar el watch time del canal un 25–35%.</li>
+        </ul>
+        <div class="opp-kpis">
+          <div class="opp-kpi"><span class="opp-kpi-val">+35%</span><span class="opp-kpi-label">CTR en búsquedas</span></div>
+          <div class="opp-kpi"><span class="opp-kpi-val">+25%</span><span class="opp-kpi-label">Watch time por playlist</span></div>
+          <div class="opp-kpi"><span class="opp-kpi-val">1 día</span><span class="opp-kpi-label">Tiempo de implementación</span></div>
+        </div>
+        <div class="opp-tools">🛠 Herramientas: <span class="opp-tool-tag">YouTube Studio</span><span class="opp-tool-tag">TubeBuddy</span><span class="opp-tool-tag">VidIQ</span></div>
+        <div class="opp-meta">
+          <span class="opp-impact alto">Impacto: Alto</span>
+          <span class="opp-priority p2">🔶 Prioridad #6</span>
+          <span class="opp-timeline">⏱ Semana 1 (1–2 días)</span>
+        </div>
+      </div>
+
+      <!-- ===== OPP 7: Instagram Lives + Cross-Platform ===== -->
+      <div class="opp-card accent-purple">
+        <div class="opp-header">
+          <span class="opp-category-tag purple">📡 Engagement</span>
+          <span class="opp-icon-wrap">🔴</span>
+        </div>
+        <div class="opp-title">Lives Coordinados Multi-Plataforma: Instagram + TikTok + Facebook</div>
+        <div class="opp-context">
+          OVI tiene <strong style="color:#fff">3.3M de seguidores en Instagram verificados</strong>, pero no se detecta una estrategia consistente de transmisiones en vivo. Los Lives son el formato con mayor tasa de notificación push (el 80% de los seguidores recibe una notificación al inicio de un Live) y generan el contenido con mayor engagement orgánico en todas las plataformas simultáneamente.
+        </div>
+        <div class="opp-steps-title">📋 Estrategia de Lives Semanal</div>
+        <ul class="opp-steps">
+          <li><span class="opp-step-num">1</span><strong style="color:#fff">Programa fijo de Lives:</strong> Establecer un calendario fijo — por ejemplo, cada viernes 9pm ET. La consistencia de horario acondiciona a la audiencia a esperar y conectarse. Anunciar el Live 48h antes con un Reel/Story de cuenta regresiva.</li>
+          <li><span class="opp-step-num">2</span><strong style="color:#fff">Live simultáneo en Instagram + TikTok:</strong> Usar software como StreamYard o Restream para transmitir al mismo tiempo en Instagram Live y TikTok LIVE, duplicando el alcance sin duplicar el esfuerzo.</li>
+          <li><span class="opp-step-num">3</span><strong style="color:#fff">Formatos de Lives rotatorios:</strong> (a) Sesión de estudio en vivo — mostrar el proceso de producción de una canción. (b) Q&amp;A de fans — responder preguntas en tiempo real. (c) Listening party — escuchar el nuevo sencillo en simultáneo con los fans antes del lanzamiento oficial.</li>
+          <li><span class="opp-step-num">4</span><strong style="color:#fff">Monetización de Lives:</strong> En TikTok LIVE activar "Gifts" para que fans envíen regalos virtuales. En Instagram Live activar "Insignias" (Badges) donde fans pagan $0.99, $1.99 o $4.99 por una insignia de corazón visible durante el live.</li>
+          <li><span class="opp-step-num">5</span>Guardar cada Live como Reel en Instagram y como video en TikTok para que el contenido siga generando vistas y alcance orgánico los días posteriores al live.</li>
+        </ul>
+        <div class="opp-kpis">
+          <div class="opp-kpi"><span class="opp-kpi-val">80%</span><span class="opp-kpi-label">Tasa notificación push</span></div>
+          <div class="opp-kpi"><span class="opp-kpi-val">$3K+</span><span class="opp-kpi-label">Revenue mensual en lives</span></div>
+          <div class="opp-kpi"><span class="opp-kpi-val">4x</span><span class="opp-kpi-label">Más engagement que posts</span></div>
+        </div>
+        <div class="opp-tools">🛠 Herramientas: <span class="opp-tool-tag">StreamYard</span><span class="opp-tool-tag">Restream</span><span class="opp-tool-tag">OBS Studio</span><span class="opp-tool-tag">Instagram Badges</span></div>
+        <div class="opp-meta">
+          <span class="opp-impact alto">Impacto: Alto</span>
+          <span class="opp-priority p2">🔶 Prioridad #7</span>
+          <span class="opp-timeline">⏱ Semanal / Indefinido</span>
+        </div>
+      </div>
+
+      <!-- ===== OPP 8: Email List / Fan Club ===== -->
+      <div class="opp-card accent-green">
+        <div class="opp-header">
+          <span class="opp-category-tag green">🏆 Activos Propios</span>
+          <span class="opp-icon-wrap">📧</span>
+        </div>
+        <div class="opp-title">Lista de Email + Fan Club — Propiedad Total de tu Audiencia</div>
+        <div class="opp-context">
+          OVI tiene <strong style="color:#fff">7.5M+ de seguidores en redes sociales</strong>, pero si Instagram o TikTok cerraran mañana, <strong style="color:#fbbf24">perdería toda esa audiencia de un día para otro</strong>. Una lista de email es el único canal de comunicación directa que nadie puede quitar. Los artistas con email lists de 50K–200K fans generan ingresos pre-venta de boletos y merchandise que las redes nunca pueden garantizar.
+        </div>
+        <div class="opp-steps-title">📋 Construcción del Fan Club Propio</div>
+        <ul class="opp-steps">
+          <li><span class="opp-step-num">1</span><strong style="color:#fff">Crear landing page de Fan Club:</strong> Una página simple (puede ser en Beehiiv o ConvertKit) donde los fans se registren con su email a cambio de un beneficio exclusivo: acceso anticipado a letras, descuento del 10% en merch, o una canción inédita descargable.</li>
+          <li><span class="opp-step-num">2</span><strong style="color:#fff">Link en bio multi-plataforma:</strong> Cambiar el link en bio de Instagram, TikTok y Facebook a un Linktree o Beacons con el Fan Club como primera opción. Añadir una Story fijada en Instagram promoviendo el registro al Fan Club.</li>
+          <li><span class="opp-step-num">3</span><strong style="color:#fff">Secuencia de bienvenida automatizada:</strong> Crear 5 emails automáticos que se envían en los primeros 10 días después del registro: (1) Bienvenida + regalo exclusivo, (2) Historia personal de OVI, (3) Top 5 canciones favoritas con letra, (4) Invitación al grupo privado de Facebook, (5) Pre-acceso al próximo lanzamiento.</li>
+          <li><span class="opp-step-num">4</span><strong style="color:#fff">Newsletter mensual "OVI Insider":</strong> Email mensual con noticias exclusivas antes que nadie: fechas de gira, lanzamientos, fotos de backstage. La tasa de apertura en artistas musicales es del 35–50%, mucho mayor que el alcance orgánico de redes.</li>
+          <li><span class="opp-step-num">5</span>Meta a 12 meses: 100,000 emails de fans reales. Con esa lista, la preventa de boletos de cualquier tour puede agotarse en horas sin depender de plataformas de terceros.</li>
+        </ul>
+        <div class="opp-kpis">
+          <div class="opp-kpi"><span class="opp-kpi-val">100K</span><span class="opp-kpi-label">Emails objetivo a 12 meses</span></div>
+          <div class="opp-kpi"><span class="opp-kpi-val">45%</span><span class="opp-kpi-label">Tasa apertura estimada</span></div>
+          <div class="opp-kpi"><span class="opp-kpi-val">$0</span><span class="opp-kpi-label">Costo hasta 1K suscriptores</span></div>
+        </div>
+        <div class="opp-tools">🛠 Herramientas: <span class="opp-tool-tag">Beehiiv</span><span class="opp-tool-tag">ConvertKit</span><span class="opp-tool-tag">Beacons.ai</span><span class="opp-tool-tag">Linktree Pro</span></div>
+        <div class="opp-meta">
           <span class="opp-impact medio-alto">Impacto: Medio-Alto</span>
+          <span class="opp-priority p3">🟣 Prioridad #8</span>
+          <span class="opp-timeline">⏱ Meses 1–12</span>
+        </div>
+      </div>
+
+      <!-- ===== OPP 9: Facebook Comunidad ===== -->
+      <div class="opp-card accent-blue">
+        <div class="opp-header">
+          <span class="opp-category-tag blue">📊 Comunidad</span>
+          <span class="opp-icon-wrap">👥</span>
+        </div>
+        <div class="opp-title">Facebook — Reactivar Comunidad + Grupo Privado de Fans</div>
+        <div class="opp-context">
+          <strong style="color:#fff">414K seguidores en Facebook</strong> con engagement potencialmente dormido. Facebook sigue siendo la plataforma dominante para el segmento <strong style="color:#fff">25–45 años en Latinoamérica</strong> y la diáspora hispana en EE.UU. Un Grupo de Facebook privado (Fan Club oficial) puede reactivar una comunidad muy leal que las otras plataformas no capturan.
+        </div>
+        <div class="opp-steps-title">📋 Plan de Reactivación en 90 Días</div>
+        <ul class="opp-steps">
+          <li><span class="opp-step-num">1</span><strong style="color:#fff">Semana 1–2:</strong> Crear el Grupo de Facebook "OVI Fan Club Oficial" — privado, moderado, con reglas claras. Promoverlo desde la página con un post fijado e invitación a todos los seguidores existentes. Meta: 10,000 miembros en 30 días.</li>
+          <li><span class="opp-step-num">2</span><strong style="color:#fff">Semana 3–4:</strong> Lanzar una serie de contenido exclusivo del grupo: "Lunes de Lyrics" (letra inédita o demo), "Miércoles de Backstage" (foto/video de estudio), "Viernes de Fan" (el fan de la semana seleccionado por OVI).</li>
+          <li><span class="opp-step-num">3</span><strong style="color:#fff">Mes 2:</strong> Activar Facebook Live exclusivo para miembros del grupo — Q&amp;A privado de 30 minutos mensual. Esto crea un incentivo premium para unirse al grupo y mantenerse activo.</li>
+          <li><span class="opp-step-num">4</span>Conectar la página de Facebook con Instagram usando Meta Business Suite para publicar automáticamente el contenido de Instagram en Facebook, manteniendo ambas plataformas activas sin esfuerzo doble.</li>
+          <li><span class="opp-step-num">5</span><strong style="color:#fff">Mes 3:</strong> Activar la función "Suscripciones" de Facebook (Facebook Stars / Subscriptions) para crear un nivel de fan premium dentro de la misma plataforma con beneficios exclusivos.</li>
+        </ul>
+        <div class="opp-kpis">
+          <div class="opp-kpi"><span class="opp-kpi-val">60K</span><span class="opp-kpi-label">Engagement objetivo en 90d</span></div>
+          <div class="opp-kpi"><span class="opp-kpi-val">10K</span><span class="opp-kpi-label">Miembros grupo en 30 días</span></div>
+          <div class="opp-kpi"><span class="opp-kpi-val">3x</span><span class="opp-kpi-label">Alcance orgánico vs. página</span></div>
+        </div>
+        <div class="opp-tools">🛠 Herramientas: <span class="opp-tool-tag">Meta Business Suite</span><span class="opp-tool-tag">Facebook Groups</span><span class="opp-tool-tag">Facebook Stars</span><span class="opp-tool-tag">Creator Studio</span></div>
+        <div class="opp-meta">
+          <span class="opp-impact medio-alto">Impacto: Medio-Alto</span>
+          <span class="opp-priority p3">🟣 Prioridad #9</span>
+          <span class="opp-timeline">⏱ Meses 1–3</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================== ROADMAP 12 MESES ======================== -->
+  <section class="fade-in fade-in-5 roadmap-section">
+    <div class="section-label">Plan de Ejecución</div>
+    <div class="section-title">Roadmap de <span class="accent">12 Meses</span></div>
+    <div class="roadmap-grid">
+
+      <div class="roadmap-phase">
+        <div class="roadmap-phase-label">Fase 1 · Meses 1–3</div>
+        <div class="roadmap-phase-title">⚡ Activación Rápida</div>
+        <div class="roadmap-item"><span class="roadmap-dot dot-red"></span>Solicitar verificación en YouTube y TikTok</div>
+        <div class="roadmap-item"><span class="roadmap-dot dot-red"></span>Publicar primeros 30 YouTube Shorts (TikToks reciclados)</div>
+        <div class="roadmap-item"><span class="roadmap-dot dot-red"></span>Lanzar Fan Club en Beehiiv / ConvertKit</div>
+        <div class="roadmap-item"><span class="roadmap-dot dot-red"></span>Crear Grupo de Facebook Fan Club Oficial</div>
+        <div class="roadmap-item"><span class="roadmap-dot dot-red"></span>Activar Canal de Membresías en YouTube</div>
+        <div class="roadmap-item"><span class="roadmap-dot dot-red"></span>Configurar primera campaña de Meta Ads ($700 USD test)</div>
+        <div class="roadmap-phase-kpi">
+          <div class="roadmap-phase-kpi-val">+400K</div>
+          <div class="roadmap-phase-kpi-label">Seguidores nuevos proyectados</div>
+        </div>
+      </div>
+
+      <div class="roadmap-phase">
+        <div class="roadmap-phase-label">Fase 2 · Meses 4–6</div>
+        <div class="roadmap-phase-title">📈 Escala y Revenue</div>
+        <div class="roadmap-item"><span class="roadmap-dot dot-amber"></span>1ª Colaboración estratégica (mercado México)</div>
+        <div class="roadmap-item"><span class="roadmap-dot dot-amber"></span>Activar TikTok Creator Marketplace</div>
+        <div class="roadmap-item"><span class="roadmap-dot dot-amber"></span>Lanzar YouTube Shopping (merchandise)</div>
+        <div class="roadmap-item"><span class="roadmap-dot dot-amber"></span>Calendario fijo de Lives semanales (viernes)</div>
+        <div class="roadmap-item"><span class="roadmap-dot dot-amber"></span>Registrarse en YouTube BrandConnect</div>
+        <div class="roadmap-item"><span class="roadmap-dot dot-amber"></span>Meta Ads: escalar a $2,000 USD/lanzamiento</div>
+        <div class="roadmap-phase-kpi">
+          <div class="roadmap-phase-kpi-val">$20K+</div>
+          <div class="roadmap-phase-kpi-label">Revenue mensual estimado</div>
+        </div>
+      </div>
+
+      <div class="roadmap-phase">
+        <div class="roadmap-phase-label">Fase 3 · Meses 7–12</div>
+        <div class="roadmap-phase-title">🚀 Dominio del Mercado</div>
+        <div class="roadmap-item"><span class="roadmap-dot dot-green"></span>2ª y 3ª Colaboración (Colombia + EE.UU. bilingüe)</div>
+        <div class="roadmap-item"><span class="roadmap-dot dot-green"></span>10M de suscriptores en YouTube objetivo</div>
+        <div class="roadmap-item"><span class="roadmap-dot dot-green"></span>100K emails en Fan Club activo</div>
+        <div class="roadmap-item"><span class="roadmap-dot dot-green"></span>Tour anunciado con presale exclusiva via email</div>
+        <div class="roadmap-item"><span class="roadmap-dot dot-green"></span>Álbum completo con rollout multi-plataforma coordinado</div>
+        <div class="roadmap-item"><span class="roadmap-dot dot-green"></span>Expansión a Spotify Canvas + Spotify Marquee Ads</div>
+        <div class="roadmap-phase-kpi">
+          <div class="roadmap-phase-kpi-val">10M</div>
+          <div class="roadmap-phase-kpi-label">Seguidores totales proyectados</div>
         </div>
       </div>
 
