@@ -1,0 +1,1550 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OVI — Reporte de Analítica Multi-Plataforma · Marzo 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0f;
+      --card: #12121a;
+      --card2: #1a1a2e;
+      --border: rgba(255,255,255,0.08);
+      --purple: #7c3aed;
+      --pink: #ec4899;
+      --ig: #e1306c;
+      --tt: #69c9d0;
+      --yt: #ff0000;
+      --fb: #1877f2;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --dim: #64748b;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Animated background mesh */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 800px 600px at 20% 10%, rgba(124,58,237,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 600px 500px at 80% 80%, rgba(236,72,153,0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 400px 400px at 60% 20%, rgba(105,201,208,0.04) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ======================== HERO ======================== */
+    .hero {
+      padding: 64px 0 48px;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero-avatar {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      margin: 0 auto 24px;
+      background: linear-gradient(135deg, var(--purple), var(--pink));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 42px;
+      font-weight: 900;
+      letter-spacing: -2px;
+      color: #fff;
+      box-shadow: 0 0 0 4px rgba(124,58,237,0.3), 0 0 40px rgba(124,58,237,0.25);
+      position: relative;
+      animation: pulse-ring 3s ease-in-out infinite;
+    }
+
+    @keyframes pulse-ring {
+      0%, 100% { box-shadow: 0 0 0 4px rgba(124,58,237,0.3), 0 0 40px rgba(124,58,237,0.25); }
+      50% { box-shadow: 0 0 0 8px rgba(236,72,153,0.25), 0 0 60px rgba(236,72,153,0.2); }
+    }
+
+    .verified-badge {
+      position: absolute;
+      bottom: 4px;
+      right: 4px;
+      width: 26px;
+      height: 26px;
+      background: var(--ig);
+      border-radius: 50%;
+      border: 2px solid var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+    }
+
+    .hero-title {
+      font-size: clamp(56px, 10vw, 96px);
+      font-weight: 900;
+      letter-spacing: -4px;
+      background: linear-gradient(135deg, #fff 0%, var(--purple) 40%, var(--pink) 70%, #fff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+
+    .hero-handle {
+      font-size: 18px;
+      color: var(--muted);
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .hero-handle span {
+      background: linear-gradient(90deg, var(--purple), var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 600;
+    }
+
+    .hero-subtitle {
+      font-size: 14px;
+      color: var(--dim);
+      font-weight: 400;
+      letter-spacing: 0.5px;
+      margin-top: 4px;
+    }
+
+    .hero-tags {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      color: var(--muted);
+      transition: all 0.2s;
+    }
+
+    .tag:hover { background: rgba(124,58,237,0.15); border-color: rgba(124,58,237,0.4); color: #c4b5fd; }
+    .tag.ig { border-color: rgba(225,48,108,0.3); color: var(--ig); }
+    .tag.tt { border-color: rgba(105,201,208,0.3); color: var(--tt); }
+    .tag.yt { border-color: rgba(255,0,0,0.3); color: var(--yt); }
+    .tag.fb { border-color: rgba(24,119,242,0.3); color: var(--fb); }
+
+    /* ======================== SECTION ======================== */
+    section { padding: 40px 0; }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 32px;
+      letter-spacing: -0.5px;
+    }
+
+    .section-title .accent {
+      background: linear-gradient(90deg, var(--purple), var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ======================== CARDS ======================== */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      backdrop-filter: blur(12px);
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+      border-color: rgba(124,58,237,0.25);
+    }
+
+    /* ======================== OVERVIEW STRIP ======================== */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 900px) { .overview-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .overview-grid { grid-template-columns: 1fr; } }
+
+    .overview-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 24px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .overview-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--purple), var(--pink));
+    }
+
+    .overview-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+
+    .overview-card .ov-icon {
+      font-size: 28px;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .overview-card .ov-value {
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 900;
+      letter-spacing: -1px;
+      background: linear-gradient(135deg, #fff, rgba(255,255,255,0.7));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .overview-card .ov-label {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .overview-card .ov-sub {
+      font-size: 11px;
+      color: var(--dim);
+      margin-top: 4px;
+    }
+
+    /* ======================== PLATFORM CARDS ======================== */
+    .platforms-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 1000px) { .platforms-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .platforms-grid { grid-template-columns: 1fr; } }
+
+    .platform-card {
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+
+    .platform-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      border-radius: 4px 0 0 4px;
+    }
+
+    .platform-card.ig::before { background: var(--ig); }
+    .platform-card.tt::before { background: var(--tt); }
+    .platform-card.yt::before { background: var(--yt); }
+    .platform-card.fb::before { background: var(--fb); }
+
+    .platform-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+    }
+
+    .platform-card.ig:hover { border-color: rgba(225,48,108,0.3); box-shadow: 0 24px 60px rgba(225,48,108,0.12); }
+    .platform-card.tt:hover { border-color: rgba(105,201,208,0.3); box-shadow: 0 24px 60px rgba(105,201,208,0.12); }
+    .platform-card.yt:hover { border-color: rgba(255,0,0,0.3); box-shadow: 0 24px 60px rgba(255,0,0,0.12); }
+    .platform-card.fb:hover { border-color: rgba(24,119,242,0.3); box-shadow: 0 24px 60px rgba(24,119,242,0.12); }
+
+    .platform-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-left: 8px;
+    }
+
+    .platform-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .platform-icon.ig { background: rgba(225,48,108,0.15); }
+    .platform-icon.tt { background: rgba(105,201,208,0.15); }
+    .platform-icon.yt { background: rgba(255,0,0,0.15); }
+    .platform-icon.fb { background: rgba(24,119,242,0.15); }
+
+    .platform-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .platform-verified {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(225,48,108,0.15);
+      color: var(--ig);
+      border: 1px solid rgba(225,48,108,0.3);
+      font-weight: 600;
+    }
+
+    .platform-stat {
+      padding-left: 8px;
+      margin-bottom: 12px;
+    }
+
+    .platform-stat .stat-val {
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: #fff;
+      line-height: 1;
+    }
+
+    .platform-stat .stat-label {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .platform-details {
+      padding-left: 8px;
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+      margin-top: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--dim);
+    }
+
+    .detail-row span:last-child { color: var(--muted); font-weight: 500; }
+
+    /* ======================== CHARTS ======================== */
+    .charts-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 900px) { .charts-grid { grid-template-columns: 1fr; } }
+
+    .chart-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .chart-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    }
+
+    .chart-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .chart-sub {
+      font-size: 12px;
+      color: var(--dim);
+      margin-bottom: 24px;
+    }
+
+    .chart-wrap {
+      position: relative;
+      height: 300px;
+    }
+
+    .chart-wrap.tall { height: 360px; }
+    .chart-wrap.doughnut { height: 280px; }
+
+    /* ======================== TABLES ======================== */
+    .table-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .table-header {
+      padding: 24px 28px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .table-header .chart-title { margin-bottom: 4px; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead th {
+      padding: 12px 20px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--dim);
+      background: rgba(255,255,255,0.02);
+      border-bottom: 1px solid var(--border);
+    }
+
+    tbody tr {
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      transition: background 0.15s;
+    }
+
+    tbody tr:nth-child(even) { background: rgba(255,255,255,0.015); }
+    tbody tr:hover { background: rgba(124,58,237,0.08); }
+
+    tbody td {
+      padding: 14px 20px;
+      font-size: 13px;
+      color: var(--muted);
+      vertical-align: middle;
+    }
+
+    tbody td:first-child { color: var(--text); font-weight: 500; }
+
+    .likes-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: rgba(225,48,108,0.12);
+      color: var(--ig);
+      font-size: 12px;
+      font-weight: 600;
+      border: 1px solid rgba(225,48,108,0.2);
+    }
+
+    .views-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: rgba(255,0,0,0.1);
+      color: #ff6b6b;
+      font-size: 12px;
+      font-weight: 600;
+      border: 1px solid rgba(255,0,0,0.2);
+    }
+
+    /* ======================== INSIGHTS ======================== */
+    .insights-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 800px) { .insights-grid { grid-template-columns: 1fr; } }
+
+    .insight-card {
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 24px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .insight-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(124,58,237,0.05), rgba(236,72,153,0.05));
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .insight-card:hover { transform: translateY(-4px); box-shadow: 0 24px 50px rgba(0,0,0,0.4); }
+    .insight-card:hover::after { opacity: 1; }
+
+    .insight-icon {
+      font-size: 36px;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .insight-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .insight-text {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ======================== OPPORTUNITIES ======================== */
+    .opps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 1000px) { .opps-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .opps-grid { grid-template-columns: 1fr; } }
+
+    .opp-card {
+      background: var(--card);
+      border: 1px solid rgba(251,191,36,0.2);
+      border-radius: 16px;
+      padding: 24px;
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .opp-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+    }
+
+    /* Accent top-border per card */
+    .opp-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      border-radius: 16px 16px 0 0;
+    }
+
+    .opp-card.accent-blue::before   { background: linear-gradient(90deg, #3b82f6, #69c9d0); }
+    .opp-card.accent-red::before    { background: linear-gradient(90deg, #ef4444, #ff6b6b); }
+    .opp-card.accent-gold::before   { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+    .opp-card.accent-green::before  { background: linear-gradient(90deg, #10b981, #34d399); }
+    .opp-card.accent-purple::before { background: linear-gradient(90deg, #7c3aed, #a78bfa); }
+    .opp-card.accent-teal::before   { background: linear-gradient(90deg, #0891b2, #22d3ee); }
+
+    .opp-card.accent-blue   { border-color: rgba(59,130,246,0.25); }
+    .opp-card.accent-red    { border-color: rgba(239,68,68,0.25); }
+    .opp-card.accent-gold   { border-color: rgba(245,158,11,0.25); }
+    .opp-card.accent-green  { border-color: rgba(16,185,129,0.25); }
+    .opp-card.accent-purple { border-color: rgba(124,58,237,0.25); }
+    .opp-card.accent-teal   { border-color: rgba(8,145,178,0.25); }
+
+    .opp-card.accent-blue:hover   { box-shadow: 0 20px 50px rgba(59,130,246,0.1); border-color: rgba(59,130,246,0.45); }
+    .opp-card.accent-red:hover    { box-shadow: 0 20px 50px rgba(239,68,68,0.1); border-color: rgba(239,68,68,0.45); }
+    .opp-card.accent-gold:hover   { box-shadow: 0 20px 50px rgba(245,158,11,0.1); border-color: rgba(245,158,11,0.45); }
+    .opp-card.accent-green:hover  { box-shadow: 0 20px 50px rgba(16,185,129,0.1); border-color: rgba(16,185,129,0.45); }
+    .opp-card.accent-purple:hover { box-shadow: 0 20px 50px rgba(124,58,237,0.1); border-color: rgba(124,58,237,0.45); }
+    .opp-card.accent-teal:hover   { box-shadow: 0 20px 50px rgba(8,145,178,0.1); border-color: rgba(8,145,178,0.45); }
+
+    .opp-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      gap: 8px;
+    }
+
+    .opp-category-tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .opp-category-tag.blue   { background: rgba(59,130,246,0.15); color: #93c5fd; border: 1px solid rgba(59,130,246,0.3); }
+    .opp-category-tag.red    { background: rgba(239,68,68,0.15); color: #fca5a5; border: 1px solid rgba(239,68,68,0.3); }
+    .opp-category-tag.gold   { background: rgba(245,158,11,0.15); color: #fbbf24; border: 1px solid rgba(245,158,11,0.3); }
+    .opp-category-tag.green  { background: rgba(16,185,129,0.15); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.3); }
+    .opp-category-tag.purple { background: rgba(124,58,237,0.15); color: #c4b5fd; border: 1px solid rgba(124,58,237,0.3); }
+    .opp-category-tag.teal   { background: rgba(8,145,178,0.15); color: #67e8f9; border: 1px solid rgba(8,145,178,0.3); }
+
+    .opp-icon-wrap {
+      font-size: 28px;
+      line-height: 1;
+    }
+
+    .opp-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+
+    .opp-bullets {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      flex: 1;
+    }
+
+    .opp-bullets li {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.55;
+      padding-left: 14px;
+      position: relative;
+    }
+
+    .opp-bullets li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: var(--dim);
+      font-size: 10px;
+      top: 2px;
+    }
+
+    .opp-footer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+
+    .opp-impact {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .opp-impact.alto       { background: rgba(239,68,68,0.15); color: #fca5a5; border: 1px solid rgba(239,68,68,0.3); }
+    .opp-impact.muy-alto   { background: rgba(245,158,11,0.18); color: #fbbf24; border: 1px solid rgba(245,158,11,0.35); }
+    .opp-impact.medio-alto { background: rgba(16,185,129,0.15); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.3); }
+
+    /* ======================== FOOTER ======================== */
+    .footer {
+      padding: 48px 0 40px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      margin-top: 32px;
+    }
+
+    .footer-logo {
+      font-size: 28px;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--purple), var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -1px;
+      margin-bottom: 12px;
+    }
+
+    .footer-text {
+      font-size: 13px;
+      color: var(--dim);
+    }
+
+    .footer-text strong { color: var(--muted); }
+
+    /* ======================== DIVIDER ======================== */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      margin: 8px 0;
+    }
+
+    /* ======================== COUNTER ======================== */
+    .counter { display: inline-block; }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: rgba(124,58,237,0.4); border-radius: 3px; }
+
+    /* Fade-in animation */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in { animation: fadeInUp 0.6s ease forwards; }
+    .fade-in-1 { animation-delay: 0.1s; opacity: 0; }
+    .fade-in-2 { animation-delay: 0.2s; opacity: 0; }
+    .fade-in-3 { animation-delay: 0.3s; opacity: 0; }
+    .fade-in-4 { animation-delay: 0.4s; opacity: 0; }
+    .fade-in-5 { animation-delay: 0.5s; opacity: 0; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ======================== HERO ======================== -->
+  <header class="hero fade-in fade-in-1">
+    <div class="hero-avatar">
+      OVI
+      <span class="verified-badge">✓</span>
+    </div>
+    <h1 class="hero-title">OVI</h1>
+    <p class="hero-handle"><span>@ovi_oficial</span> &nbsp;·&nbsp; Artista de Música Latina</p>
+    <p class="hero-subtitle">Reporte de Analítica Multi-Plataforma &nbsp;·&nbsp; Marzo 2026</p>
+    <div class="hero-tags">
+      <span class="tag ig">Instagram ✓ Verificado</span>
+      <span class="tag tt">TikTok</span>
+      <span class="tag yt">YouTube</span>
+      <span class="tag fb">Facebook</span>
+      <span class="tag">Música Latina</span>
+      <span class="tag">Reggaetón</span>
+    </div>
+  </header>
+
+  <!-- ======================== OVERVIEW STRIP ======================== -->
+  <section class="fade-in fade-in-2">
+    <div class="section-label">Resumen de Desempeño</div>
+    <div class="section-title">Métricas <span class="accent">Clave</span></div>
+    <div class="overview-grid">
+      <div class="overview-card">
+        <span class="ov-icon">🌍</span>
+        <div class="ov-value"><span class="counter" data-target="7500000" data-suffix="M+" data-divisor="1000000" data-decimals="1">0</span></div>
+        <div class="ov-label">Alcance Total Multi-Plataforma</div>
+        <div class="ov-sub">Instagram + TikTok + YouTube + Facebook</div>
+      </div>
+      <div class="overview-card">
+        <span class="ov-icon">▶️</span>
+        <div class="ov-value"><span class="counter" data-target="460000000" data-suffix="M+" data-divisor="1000000" data-decimals="0">0</span></div>
+        <div class="ov-label">Vistas Totales en YouTube</div>
+        <div class="ov-sub">En 43 videos publicados</div>
+      </div>
+      <div class="overview-card">
+        <span class="ov-icon">❤️</span>
+        <div class="ov-value"><span class="counter" data-target="42700000" data-suffix="M" data-divisor="1000000" data-decimals="1">0</span></div>
+        <div class="ov-label">Corazones Totales en TikTok</div>
+        <div class="ov-sub">153 videos publicados</div>
+      </div>
+      <div class="overview-card">
+        <span class="ov-icon">⭐</span>
+        <div class="ov-value"><span class="counter" data-target="98" data-suffix="%" data-divisor="1" data-decimals="0">0</span></div>
+        <div class="ov-label">Calificación de Audiencia en Facebook</div>
+        <div class="ov-sub">414K+ seguidores en Facebook</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== PLATFORM BREAKDOWN ======================== -->
+  <section class="fade-in fade-in-3">
+    <div class="section-label">Desglose por Plataforma</div>
+    <div class="section-title">Distribución de <span class="accent">Audiencia</span></div>
+    <div class="platforms-grid">
+
+      <!-- Instagram -->
+      <div class="platform-card ig">
+        <div class="platform-header">
+          <div class="platform-icon ig">📷</div>
+          <div>
+            <div class="platform-name">Instagram</div>
+            <span class="platform-verified">✓ Verificado</span>
+          </div>
+        </div>
+        <div class="platform-stat">
+          <div class="stat-val">3.3M</div>
+          <div class="stat-label">Seguidores</div>
+        </div>
+        <div class="platform-details">
+          <div class="detail-row"><span>Publicaciones</span><span>100</span></div>
+          <div class="detail-row"><span>Promedio Me Gustas / Reel</span><span>166K</span></div>
+          <div class="detail-row"><span>Me Gustas en Post Top</span><span>713.9K</span></div>
+          <div class="detail-row"><span>Verificación</span><span style="color:var(--ig)">✓ Verificado</span></div>
+        </div>
+      </div>
+
+      <!-- TikTok -->
+      <div class="platform-card tt">
+        <div class="platform-header">
+          <div class="platform-icon tt">🎵</div>
+          <div>
+            <div class="platform-name">TikTok</div>
+          </div>
+        </div>
+        <div class="platform-stat">
+          <div class="stat-val">3.1M</div>
+          <div class="stat-label">Seguidores</div>
+        </div>
+        <div class="platform-details">
+          <div class="detail-row"><span>Videos</span><span>153</span></div>
+          <div class="detail-row"><span>Corazones Totales</span><span>42.7M</span></div>
+          <div class="detail-row"><span>Reproducciones Top Video</span><span>18M</span></div>
+          <div class="detail-row"><span>Verificación</span><span style="color:#fbbf24">Sin Verificar</span></div>
+        </div>
+      </div>
+
+      <!-- YouTube -->
+      <div class="platform-card yt">
+        <div class="platform-header">
+          <div class="platform-icon yt">▶</div>
+          <div>
+            <div class="platform-name">YouTube</div>
+          </div>
+        </div>
+        <div class="platform-stat">
+          <div class="stat-val">723K</div>
+          <div class="stat-label">Suscriptores</div>
+        </div>
+        <div class="platform-details">
+          <div class="detail-row"><span>Videos</span><span>43</span></div>
+          <div class="detail-row"><span>Vistas Totales</span><span>460M+</span></div>
+          <div class="detail-row"><span>Promedio Vistas / Video</span><span>10.7M</span></div>
+          <div class="detail-row"><span>Verificación</span><span style="color:#fbbf24">Sin Verificar</span></div>
+        </div>
+      </div>
+
+      <!-- Facebook -->
+      <div class="platform-card fb">
+        <div class="platform-header">
+          <div class="platform-icon fb">f</div>
+          <div>
+            <div class="platform-name">Facebook</div>
+          </div>
+        </div>
+        <div class="platform-stat">
+          <div class="stat-val">414K</div>
+          <div class="stat-label">Seguidores</div>
+        </div>
+        <div class="platform-details">
+          <div class="detail-row"><span>Categoría</span><span>Músico/Banda</span></div>
+          <div class="detail-row"><span>Calificación de Audiencia</span><span>98%</span></div>
+          <div class="detail-row"><span>Anuncios Activos</span><span style="color:#fbbf24">Ninguno</span></div>
+          <div class="detail-row"><span>Engagement</span><span>Alto</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================== CHARTS ======================== -->
+  <section class="fade-in fade-in-3">
+    <div class="section-label">Visualización de Datos</div>
+    <div class="section-title">Gráficas de <span class="accent">Analítica</span></div>
+    <div class="charts-grid">
+
+      <!-- YouTube Top Videos Bar -->
+      <div class="chart-card">
+        <div class="chart-title">Top Videos de YouTube por Vistas</div>
+        <div class="chart-sub">Vistas totales por video publicado (ordenado de mayor a menor)</div>
+        <div class="chart-wrap tall">
+          <canvas id="ytChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Follower Doughnut -->
+      <div class="chart-card" style="display:flex;flex-direction:column;justify-content:space-between;">
+        <div>
+          <div class="chart-title">Distribución de Seguidores</div>
+          <div class="chart-sub">Desglose de audiencia multi-plataforma — total 7.53M+</div>
+        </div>
+        <div class="chart-wrap doughnut" style="display:flex;align-items:center;justify-content:center;">
+          <canvas id="doughnutChart"></canvas>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px;">
+          <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);">
+            <span style="width:12px;height:12px;border-radius:50%;background:var(--ig);display:inline-block;flex-shrink:0;"></span>Instagram — 3.3M
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);">
+            <span style="width:12px;height:12px;border-radius:50%;background:var(--tt);display:inline-block;flex-shrink:0;"></span>TikTok — 3.1M
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);">
+            <span style="width:12px;height:12px;border-radius:50%;background:var(--yt);display:inline-block;flex-shrink:0;"></span>YouTube — 723K
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);">
+            <span style="width:12px;height:12px;border-radius:50%;background:var(--fb);display:inline-block;flex-shrink:0;"></span>Facebook — 414K
+          </div>
+        </div>
+      </div>
+
+      <!-- TikTok Top Videos Bar -->
+      <div class="chart-card">
+        <div class="chart-title">Top Videos de TikTok por Reproducciones</div>
+        <div class="chart-sub">Ventana de 30 días recientes — top 6 clips con mejor desempeño</div>
+        <div class="chart-wrap">
+          <canvas id="ttChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Instagram Reels Bar -->
+      <div class="chart-card">
+        <div class="chart-title">Top Reels de Instagram por Reproducciones</div>
+        <div class="chart-sub">Reels con más vistas en @ovi_oficial</div>
+        <div class="chart-wrap">
+          <canvas id="igChart"></canvas>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================== TOP POSTS TABLE ======================== -->
+  <section class="fade-in fade-in-4">
+    <div class="section-label">Desempeño en Instagram</div>
+    <div class="section-title">Mejores <span class="accent">Publicaciones</span> en Instagram</div>
+    <div class="table-card">
+      <div class="table-header">
+        <div class="chart-title">Publicaciones con Más Me Gustas en Instagram</div>
+        <div class="chart-sub">Basado en datos de engagement recopilados el 18 de marzo de 2026</div>
+      </div>
+      <div style="overflow-x:auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Publicación / Descripción</th>
+              <th>Me Gustas</th>
+              <th>Vistas</th>
+              <th>Fecha</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="color:var(--dim)">01</td>
+              <td>Disney kids 🏰</td>
+              <td><span class="likes-pill">♥ 713,910</span></td>
+              <td><span style="color:var(--dim)">—</span></td>
+              <td style="color:var(--dim)">Sep 2024</td>
+            </tr>
+            <tr>
+              <td style="color:var(--dim)">02</td>
+              <td>Superación (video)</td>
+              <td><span class="likes-pill">♥ 574,600</span></td>
+              <td><span class="views-pill">▶ 7.1M</span></td>
+              <td style="color:var(--dim)">Dic 2022</td>
+            </tr>
+            <tr>
+              <td style="color:var(--dim)">03</td>
+              <td>Rockstar teaser</td>
+              <td><span class="likes-pill">♥ 548,088</span></td>
+              <td><span style="color:var(--dim)">—</span></td>
+              <td style="color:var(--dim)">Jun 2025</td>
+            </tr>
+            <tr>
+              <td style="color:var(--dim)">04</td>
+              <td>LA 🌴</td>
+              <td><span class="likes-pill">♥ 472,668</span></td>
+              <td><span style="color:var(--dim)">—</span></td>
+              <td style="color:var(--dim)">Mar 2025</td>
+            </tr>
+            <tr>
+              <td style="color:var(--dim)">05</td>
+              <td>ft Colombia 🇨🇴🇨🇺</td>
+              <td><span class="likes-pill">♥ 452,963</span></td>
+              <td><span style="color:var(--dim)">—</span></td>
+              <td style="color:var(--dim)">Feb 2024</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== YOUTUBE TOP VIDEOS TABLE ======================== -->
+  <section class="fade-in fade-in-4" style="padding-top:0;">
+    <div class="section-label">Desempeño en YouTube</div>
+    <div class="section-title">Top <span class="accent">Videos</span> de YouTube</div>
+    <div class="table-card">
+      <div class="table-header">
+        <div class="chart-title">Videos con Más Vistas en YouTube</div>
+        <div class="chart-sub">Ordenado por total de reproducciones · Canal @ovi_oficial</div>
+      </div>
+      <div style="overflow-x:auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Título</th>
+              <th>Vistas</th>
+              <th>Me Gustas</th>
+              <th>Comentarios</th>
+              <th>Fecha</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="color:var(--dim)">01</td>
+              <td>Los Rockstar No Van al Cielo</td>
+              <td><span class="views-pill">▶ 31.4M</span></td>
+              <td>—</td>
+              <td>—</td>
+              <td style="color:var(--dim)">2023</td>
+            </tr>
+            <tr>
+              <td style="color:var(--dim)">02</td>
+              <td>A Los 16</td>
+              <td><span class="views-pill">▶ 24.1M</span></td>
+              <td>—</td>
+              <td>—</td>
+              <td style="color:var(--dim)">2022</td>
+            </tr>
+            <tr>
+              <td style="color:var(--dim)">03</td>
+              <td>HALLANDALE (Hades 66)</td>
+              <td><span class="views-pill">▶ 16.4M</span></td>
+              <td>—</td>
+              <td>—</td>
+              <td style="color:var(--dim)">2023</td>
+            </tr>
+            <tr>
+              <td style="color:var(--dim)">04</td>
+              <td>Mientras No Vuelves</td>
+              <td><span class="views-pill">▶ 10.4M</span></td>
+              <td>—</td>
+              <td>—</td>
+              <td style="color:var(--dim)">2022</td>
+            </tr>
+            <tr>
+              <td style="color:var(--dim)">05</td>
+              <td>Historia Real</td>
+              <td><span class="views-pill">▶ 6.7M</span></td>
+              <td>—</td>
+              <td>—</td>
+              <td style="color:var(--dim)">2023</td>
+            </tr>
+            <tr>
+              <td style="color:var(--dim)">06</td>
+              <td>Al Otro Nivel</td>
+              <td><span class="views-pill">▶ 5.5M</span></td>
+              <td>—</td>
+              <td>—</td>
+              <td style="color:var(--dim)">2024</td>
+            </tr>
+            <tr>
+              <td style="color:var(--dim)">07</td>
+              <td>Nada es Como Antes</td>
+              <td><span class="views-pill">▶ 4.3M</span></td>
+              <td>—</td>
+              <td>—</td>
+              <td style="color:var(--dim)">2024</td>
+            </tr>
+            <tr>
+              <td style="color:var(--dim)">08</td>
+              <td>Así Moriré</td>
+              <td><span class="views-pill">▶ 4.2M</span></td>
+              <td>—</td>
+              <td>—</td>
+              <td style="color:var(--dim)">2024</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== KEY INSIGHTS ======================== -->
+  <section class="fade-in fade-in-4">
+    <div class="section-label">Análisis</div>
+    <div class="section-title">Conclusiones <span class="accent">Clave</span></div>
+    <div class="insights-grid">
+
+      <div class="insight-card">
+        <span class="insight-icon">📺</span>
+        <div class="insight-title">YouTube como Motor Principal</div>
+        <div class="insight-text">460M+ de vistas totales en apenas 43 videos posicionan a OVI con un excepcional promedio de <strong style="color:#fff">10.7M de vistas por video</strong>. Este ratio señala un fuerte posicionamiento SEO, listas de reproducción activas y amplificación algorítmica que supera la base de suscriptores.</div>
+      </div>
+
+      <div class="insight-card">
+        <span class="insight-icon">🤝</span>
+        <div class="insight-title">Las Colaboraciones Generan Picos de Audiencia</div>
+        <div class="insight-text">El contenido más exitoso en las cuatro plataformas presenta consistentemente colaboraciones con artistas latinos destacados. Los features y lanzamientos conjuntos funcionan como <strong style="color:#fff">embudos de audiencia cruzada</strong>, disparando seguidores y picos de engagement tras cada lanzamiento.</div>
+      </div>
+
+      <div class="insight-card">
+        <span class="insight-icon">🎭</span>
+        <div class="insight-title">El Contenido Lifestyle Supera a la Música en TikTok</div>
+        <div class="insight-text">"Pinche alíen" (18M reproducciones) superó ampliamente los lanzamientos musicales oficiales en la ventana de 30 días reciente. El <strong style="color:#fff">contenido lifestyle auténtico y espontáneo</strong> conecta más con el FYP de TikTok que las promos musicales elaboradas, sugiriendo un ajuste en la mezcla de contenido.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================== OPPORTUNITIES ======================== -->
+  <section class="fade-in fade-in-5">
+    <div class="section-label">Estrategia de Crecimiento</div>
+    <div class="section-title">Oportunidades de <span class="accent">Crecimiento</span></div>
+    <div class="opps-grid">
+
+      <!-- Card 1: TikTok Verification -->
+      <div class="opp-card accent-blue">
+        <div class="opp-header">
+          <span class="opp-category-tag blue">Credibilidad</span>
+          <span class="opp-icon-wrap">🔵</span>
+        </div>
+        <div class="opp-title">Verificación en TikTok</div>
+        <ul class="opp-bullets">
+          <li>Tiene 3.1M de seguidores — muy por encima del umbral de verificación de TikTok</li>
+          <li>La verificación aumenta la confianza del público y mejora el posicionamiento en el algoritmo</li>
+          <li>Permite acceso a herramientas exclusivas: TikTok Creator Marketplace, paneles de analítica avanzada</li>
+          <li>Solicitar verificación directamente desde la app en Configuración → Cuenta → Verificación</li>
+        </ul>
+        <div class="opp-footer">
+          <span class="opp-impact alto">Impacto: Alto</span>
+        </div>
+      </div>
+
+      <!-- Card 2: YouTube Verification -->
+      <div class="opp-card accent-red">
+        <div class="opp-header">
+          <span class="opp-category-tag red">Credibilidad</span>
+          <span class="opp-icon-wrap">🔴</span>
+        </div>
+        <div class="opp-title">Verificación en YouTube</div>
+        <ul class="opp-bullets">
+          <li>723K suscriptores — ya cumple el requisito de 100K para la verificación de canal</li>
+          <li>La insignia aumenta el CTR (tasa de clics) en resultados de búsqueda y recomendaciones</li>
+          <li>Permite publicar videos de más de 15 minutos sin restricciones adicionales</li>
+          <li>Verificar en studio.youtube.com → Configuración del canal → Elegibilidad del canal</li>
+        </ul>
+        <div class="opp-footer">
+          <span class="opp-impact alto">Impacto: Alto</span>
+        </div>
+      </div>
+
+      <!-- Card 3: Facebook Ads -->
+      <div class="opp-card accent-gold">
+        <div class="opp-header">
+          <span class="opp-category-tag gold">Monetización</span>
+          <span class="opp-icon-wrap">💰</span>
+        </div>
+        <div class="opp-title">Activar Campañas de Publicidad en Facebook</div>
+        <ul class="opp-bullets">
+          <li>Actualmente no corre ningún anuncio — oportunidad directa de amplificar sus lanzamientos</li>
+          <li>Con 414K seguidores, una campaña de conversión a Spotify/Apple Music puede tener costo por clic muy bajo</li>
+          <li>Retargeting a fans de páginas similares (Bad Bunny, Anuel AA, Myke Towers) en el mercado hispano</li>
+          <li>Presupuesto inicial sugerido: $500–$1,000 USD por lanzamiento de sencillo para medir ROAS</li>
+        </ul>
+        <div class="opp-footer">
+          <span class="opp-impact muy-alto">Impacto: Muy Alto</span>
+        </div>
+      </div>
+
+      <!-- Card 4: YouTube Shorts -->
+      <div class="opp-card accent-green">
+        <div class="opp-header">
+          <span class="opp-category-tag green">Contenido</span>
+          <span class="opp-icon-wrap">📱</span>
+        </div>
+        <div class="opp-title">YouTube Shorts — Canal sin Explotar</div>
+        <ul class="opp-bullets">
+          <li>De 43 videos en el canal, cero son Shorts — formato con mayor alcance orgánico en YouTube actualmente</li>
+          <li>Sus clips virales de TikTok (ej: "Pinche alíen" con 18M reproducciones) se pueden reutilizar directamente como Shorts</li>
+          <li>Los Shorts tienen mayor probabilidad de aparecer en la pestaña "Explorar" y atraer suscriptores nuevos</li>
+          <li>Meta sugerida: publicar 3–5 Shorts por semana durante 60 días para activar el algoritmo de distribución</li>
+        </ul>
+        <div class="opp-footer">
+          <span class="opp-impact muy-alto">Impacto: Muy Alto</span>
+        </div>
+      </div>
+
+      <!-- Card 5: Collaborations -->
+      <div class="opp-card accent-purple">
+        <div class="opp-header">
+          <span class="opp-category-tag purple">Crecimiento</span>
+          <span class="opp-icon-wrap">🤝</span>
+        </div>
+        <div class="opp-title">Estrategia de Colaboraciones Estructurada</div>
+        <ul class="opp-bullets">
+          <li>Sus videos con más vistas son TODOS colaboraciones: Rockstar (31M), A Los 16 (24M), HALLANDALE (16M)</li>
+          <li>No existe una cadencia regular de collabs — se pueden planificar lanzamientos trimestrales con artistas de México, Colombia y Argentina</li>
+          <li>Expandir a mercados no explorados: España, Miami bilingüe, comunidad brasileña con artistas crossover</li>
+          <li>Crear "Episodios de Colaboración" como contenido de serie en Instagram/TikTok para generar anticipación</li>
+        </ul>
+        <div class="opp-footer">
+          <span class="opp-impact alto">Impacto: Alto</span>
+        </div>
+      </div>
+
+      <!-- Card 6: Facebook Community -->
+      <div class="opp-card accent-teal">
+        <div class="opp-header">
+          <span class="opp-category-tag teal">Engagement</span>
+          <span class="opp-icon-wrap">📊</span>
+        </div>
+        <div class="opp-title">Facebook — Reactivar la Comunidad</div>
+        <ul class="opp-bullets">
+          <li>414K seguidores con engagement potencialmente dormido — no se detectó actividad publicitaria reciente</li>
+          <li>Facebook sigue siendo la plataforma #1 para el segmento 35–55 años en Latinoamérica y entre hispanos en EE.UU.</li>
+          <li>Publicar detrás de cámaras, lives de sesiones de estudio, Q&amp;A en grupos cerrados para reactivar la comunidad</li>
+          <li>Integrar Facebook con Instagram mediante publicaciones cruzadas automáticas desde Meta Business Suite</li>
+          <li>Meta de engagement: de 28K hablando actualmente → objetivo de 60K en 90 días</li>
+        </ul>
+        <div class="opp-footer">
+          <span class="opp-impact medio-alto">Impacto: Medio-Alto</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================== FOOTER ======================== -->
+  <footer class="footer">
+    <div class="footer-logo">OVI Analytics</div>
+    <p class="footer-text">
+      <strong>Impulsado por Apify + Claude AI</strong> &nbsp;·&nbsp; Datos recopilados el 18 de marzo de 2026
+    </p>
+    <p class="footer-text" style="margin-top:8px;font-size:11px;">
+      Plataformas: Instagram · TikTok · YouTube · Facebook &nbsp;·&nbsp; Reporte generado para @ovi_oficial
+    </p>
+  </footer>
+
+</div>
+
+<!-- ======================== CHART.JS ======================== -->
+<script>
+  Chart.defaults.color = '#64748b';
+  Chart.defaults.borderColor = 'rgba(255,255,255,0.05)';
+  Chart.defaults.font.family = "'Inter', sans-serif";
+
+  const GRID = { color: 'rgba(255,255,255,0.05)', drawBorder: false };
+  const TICK = { color: '#64748b', font: { size: 11, weight: '500' } };
+
+  /* ---- YouTube Top Videos ---- */
+  new Chart(document.getElementById('ytChart'), {
+    type: 'bar',
+    data: {
+      labels: [
+        'Los Rockstar\nNo Van al Cielo',
+        'A Los 16',
+        'HALLANDALE\n(Hades 66)',
+        'Mientras\nNo Vuelves',
+        'Historia Real',
+        'Al Otro Nivel',
+        'Nada es\nComo Antes',
+        'Así Moriré'
+      ],
+      datasets: [{
+        label: 'Vistas',
+        data: [31382521, 24112976, 16395668, 10352046, 6743576, 5465853, 4259431, 4211970],
+        backgroundColor: [
+          'rgba(255,0,0,0.75)',
+          'rgba(255,0,0,0.65)',
+          'rgba(255,0,0,0.55)',
+          'rgba(255,0,0,0.45)',
+          'rgba(255,0,0,0.38)',
+          'rgba(255,0,0,0.32)',
+          'rgba(255,0,0,0.26)',
+          'rgba(255,0,0,0.22)'
+        ],
+        borderColor: 'rgba(255,0,0,0.9)',
+        borderWidth: 1,
+        borderRadius: 6,
+        borderSkipped: false
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#1a1a2e',
+          borderColor: 'rgba(255,255,255,0.1)',
+          borderWidth: 1,
+          titleColor: '#e2e8f0',
+          bodyColor: '#94a3b8',
+          padding: 12,
+          callbacks: {
+            label: ctx => ' ' + (ctx.raw / 1000000).toFixed(1) + 'M vistas'
+          }
+        }
+      },
+      scales: {
+        x: { grid: GRID, ticks: { ...TICK, maxRotation: 30 } },
+        y: {
+          grid: GRID,
+          ticks: {
+            ...TICK,
+            callback: v => (v / 1000000).toFixed(0) + 'M'
+          }
+        }
+      }
+    }
+  });
+
+  /* ---- Doughnut ---- */
+  new Chart(document.getElementById('doughnutChart'), {
+    type: 'doughnut',
+    data: {
+      labels: ['Instagram', 'TikTok', 'YouTube', 'Facebook'],
+      datasets: [{
+        data: [3297018, 3100000, 723000, 414581],
+        backgroundColor: [
+          'rgba(225,48,108,0.85)',
+          'rgba(105,201,208,0.85)',
+          'rgba(255,0,0,0.85)',
+          'rgba(24,119,242,0.85)'
+        ],
+        borderColor: '#0a0a0f',
+        borderWidth: 3,
+        hoverBorderWidth: 4,
+        hoverOffset: 8
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      cutout: '68%',
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#1a1a2e',
+          borderColor: 'rgba(255,255,255,0.1)',
+          borderWidth: 1,
+          titleColor: '#e2e8f0',
+          bodyColor: '#94a3b8',
+          padding: 12,
+          callbacks: {
+            label: ctx => ' ' + (ctx.raw / 1000000).toFixed(2) + 'M seguidores'
+          }
+        }
+      }
+    }
+  });
+
+  /* ---- TikTok Top Videos ---- */
+  new Chart(document.getElementById('ttChart'), {
+    type: 'bar',
+    data: {
+      labels: [
+        'Pinche alíen',
+        'Sé que tuvimos\ndiferencias',
+        'Buscando ropa\npal video',
+        'Por Miami en\ncarro de Luar',
+        'Pasta time',
+        'Los Rockstar\nremix'
+      ],
+      datasets: [{
+        label: 'Reproducciones',
+        data: [18000000, 7500000, 4300000, 4200000, 4000000, 3400000],
+        backgroundColor: [
+          'rgba(105,201,208,0.8)',
+          'rgba(105,201,208,0.68)',
+          'rgba(105,201,208,0.56)',
+          'rgba(105,201,208,0.46)',
+          'rgba(105,201,208,0.38)',
+          'rgba(105,201,208,0.30)'
+        ],
+        borderColor: 'rgba(105,201,208,0.9)',
+        borderWidth: 1,
+        borderRadius: 6,
+        borderSkipped: false
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#1a1a2e',
+          borderColor: 'rgba(255,255,255,0.1)',
+          borderWidth: 1,
+          titleColor: '#e2e8f0',
+          bodyColor: '#94a3b8',
+          padding: 12,
+          callbacks: {
+            label: ctx => ' ' + (ctx.raw / 1000000).toFixed(1) + 'M reproducciones'
+          }
+        }
+      },
+      scales: {
+        x: { grid: GRID, ticks: { ...TICK, maxRotation: 30 } },
+        y: {
+          grid: GRID,
+          ticks: {
+            ...TICK,
+            callback: v => (v / 1000000).toFixed(0) + 'M'
+          }
+        }
+      }
+    }
+  });
+
+  /* ---- Instagram Reels ---- */
+  new Chart(document.getElementById('igChart'), {
+    type: 'bar',
+    data: {
+      labels: [
+        'Al Otro Nivel',
+        'Yo Quiero\nun Malo',
+        'Nada es\nComo Antes',
+        'Háblame\nde Dinero',
+        'Rockstar\n(Jul 6)',
+        'Así Moriré'
+      ],
+      datasets: [{
+        label: 'Reproducciones',
+        data: [15668700, 11568073, 6635454, 6465266, 5963942, 5537507],
+        backgroundColor: [
+          'rgba(225,48,108,0.85)',
+          'rgba(225,48,108,0.72)',
+          'rgba(225,48,108,0.59)',
+          'rgba(225,48,108,0.47)',
+          'rgba(225,48,108,0.37)',
+          'rgba(225,48,108,0.30)'
+        ],
+        borderColor: 'rgba(225,48,108,0.9)',
+        borderWidth: 1,
+        borderRadius: 6,
+        borderSkipped: false
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#1a1a2e',
+          borderColor: 'rgba(255,255,255,0.1)',
+          borderWidth: 1,
+          titleColor: '#e2e8f0',
+          bodyColor: '#94a3b8',
+          padding: 12,
+          callbacks: {
+            label: ctx => ' ' + (ctx.raw / 1000000).toFixed(2) + 'M reproducciones'
+          }
+        }
+      },
+      scales: {
+        x: { grid: GRID, ticks: { ...TICK, maxRotation: 30 } },
+        y: {
+          grid: GRID,
+          ticks: {
+            ...TICK,
+            callback: v => (v / 1000000).toFixed(0) + 'M'
+          }
+        }
+      }
+    }
+  });
+
+  /* ======================== ANIMATED COUNTERS ======================== */
+  function animateCounter(el) {
+    const target = parseFloat(el.dataset.target);
+    const divisor = parseFloat(el.dataset.divisor) || 1;
+    const suffix = el.dataset.suffix || '';
+    const decimals = parseInt(el.dataset.decimals) || 0;
+    const duration = 1500;
+    const start = performance.now();
+
+    function update(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      // Ease out cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = (target * eased) / divisor;
+      el.textContent = current.toFixed(decimals) + suffix;
+      if (progress < 1) requestAnimationFrame(update);
+    }
+
+    requestAnimationFrame(update);
+  }
+
+  // Observe counters and trigger on first intersection
+  const counterEls = document.querySelectorAll('.counter');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        animateCounter(e.target);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  counterEls.forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>
