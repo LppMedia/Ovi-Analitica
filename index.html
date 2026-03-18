@@ -1,0 +1,2045 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OVI — Reporte de Analítica Multi-Plataforma · Marzo 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0f;
+      --card: #12121a;
+      --card2: #1a1a2e;
+      --border: rgba(255,255,255,0.08);
+      --purple: #7c3aed;
+      --pink: #ec4899;
+      --ig: #e1306c;
+      --tt: #69c9d0;
+      --yt: #ff0000;
+      --fb: #1877f2;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --dim: #64748b;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Animated background mesh */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 800px 600px at 20% 10%, rgba(124,58,237,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 600px 500px at 80% 80%, rgba(236,72,153,0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 400px 400px at 60% 20%, rgba(105,201,208,0.04) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ======================== HERO ======================== */
+    .hero {
+      padding: 64px 0 48px;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero-avatar {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      margin: 0 auto 24px;
+      background: linear-gradient(135deg, var(--purple), var(--pink));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 42px;
+      font-weight: 900;
+      letter-spacing: -2px;
+      color: #fff;
+      box-shadow: 0 0 0 4px rgba(124,58,237,0.3), 0 0 40px rgba(124,58,237,0.25);
+      position: relative;
+      animation: pulse-ring 3s ease-in-out infinite;
+    }
+
+    @keyframes pulse-ring {
+      0%, 100% { box-shadow: 0 0 0 4px rgba(124,58,237,0.3), 0 0 40px rgba(124,58,237,0.25); }
+      50% { box-shadow: 0 0 0 8px rgba(236,72,153,0.25), 0 0 60px rgba(236,72,153,0.2); }
+    }
+
+    .verified-badge {
+      position: absolute;
+      bottom: 4px;
+      right: 4px;
+      width: 26px;
+      height: 26px;
+      background: var(--ig);
+      border-radius: 50%;
+      border: 2px solid var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+    }
+
+    .hero-title {
+      font-size: clamp(56px, 10vw, 96px);
+      font-weight: 900;
+      letter-spacing: -4px;
+      background: linear-gradient(135deg, #fff 0%, var(--purple) 40%, var(--pink) 70%, #fff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+
+    .hero-handle {
+      font-size: 18px;
+      color: var(--muted);
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .hero-handle span {
+      background: linear-gradient(90deg, var(--purple), var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 600;
+    }
+
+    .hero-subtitle {
+      font-size: 14px;
+      color: var(--dim);
+      font-weight: 400;
+      letter-spacing: 0.5px;
+      margin-top: 4px;
+    }
+
+    .hero-tags {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      color: var(--muted);
+      transition: all 0.2s;
+    }
+
+    .tag:hover { background: rgba(124,58,237,0.15); border-color: rgba(124,58,237,0.4); color: #c4b5fd; }
+    .tag.ig { border-color: rgba(225,48,108,0.3); color: var(--ig); }
+    .tag.tt { border-color: rgba(105,201,208,0.3); color: var(--tt); }
+    .tag.yt { border-color: rgba(255,0,0,0.3); color: var(--yt); }
+    .tag.fb { border-color: rgba(24,119,242,0.3); color: var(--fb); }
+
+    /* ======================== SECTION ======================== */
+    section { padding: 40px 0; }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 32px;
+      letter-spacing: -0.5px;
+    }
+
+    .section-title .accent {
+      background: linear-gradient(90deg, var(--purple), var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ======================== CARDS ======================== */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      backdrop-filter: blur(12px);
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+      border-color: rgba(124,58,237,0.25);
+    }
+
+    /* ======================== OVERVIEW STRIP ======================== */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 900px) { .overview-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .overview-grid { grid-template-columns: 1fr; } }
+
+    .overview-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 24px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .overview-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--purple), var(--pink));
+    }
+
+    .overview-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+
+    .overview-card .ov-icon {
+      font-size: 28px;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .overview-card .ov-value {
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 900;
+      letter-spacing: -1px;
+      background: linear-gradient(135deg, #fff, rgba(255,255,255,0.7));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .overview-card .ov-label {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .overview-card .ov-sub {
+      font-size: 11px;
+      color: var(--dim);
+      margin-top: 4px;
+    }
+
+    /* ======================== PLATFORM CARDS ======================== */
+    .platforms-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 1000px) { .platforms-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .platforms-grid { grid-template-columns: 1fr; } }
+
+    .platform-card {
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+
+    .platform-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 4px;
+      border-radius: 4px 0 0 4px;
+    }
+
+    .platform-card.ig::before { background: var(--ig); }
+    .platform-card.tt::before { background: var(--tt); }
+    .platform-card.yt::before { background: var(--yt); }
+    .platform-card.fb::before { background: var(--fb); }
+
+    .platform-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+    }
+
+    .platform-card.ig:hover { border-color: rgba(225,48,108,0.3); box-shadow: 0 24px 60px rgba(225,48,108,0.12); }
+    .platform-card.tt:hover { border-color: rgba(105,201,208,0.3); box-shadow: 0 24px 60px rgba(105,201,208,0.12); }
+    .platform-card.yt:hover { border-color: rgba(255,0,0,0.3); box-shadow: 0 24px 60px rgba(255,0,0,0.12); }
+    .platform-card.fb:hover { border-color: rgba(24,119,242,0.3); box-shadow: 0 24px 60px rgba(24,119,242,0.12); }
+
+    .platform-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-left: 8px;
+    }
+
+    .platform-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .platform-icon.ig { background: rgba(225,48,108,0.15); }
+    .platform-icon.tt { background: rgba(105,201,208,0.15); }
+    .platform-icon.yt { background: rgba(255,0,0,0.15); }
+    .platform-icon.fb { background: rgba(24,119,242,0.15); }
+
+    .platform-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .platform-verified {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(225,48,108,0.15);
+      color: var(--ig);
+      border: 1px solid rgba(225,48,108,0.3);
+      font-weight: 600;
+    }
+
+    .platform-stat {
+      padding-left: 8px;
+      margin-bottom: 12px;
+    }
+
+    .platform-stat .stat-val {
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: #fff;
+      line-height: 1;
+    }
+
+    .platform-stat .stat-label {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    .platform-details {
+      padding-left: 8px;
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+      margin-top: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--dim);
+    }
+
+    .detail-row span:last-child { color: var(--muted); font-weight: 500; }
+
+    /* ======================== CHARTS ======================== */
+    .charts-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 900px) { .charts-grid { grid-template-columns: 1fr; } }
+
+    .chart-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .chart-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    }
+
+    .chart-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .chart-sub {
+      font-size: 12px;
+      color: var(--dim);
+      margin-bottom: 24px;
+    }
+
+    .chart-wrap {
+      position: relative;
+      height: 300px;
+    }
+
+    .chart-wrap.tall { height: 360px; }
+    .chart-wrap.doughnut { height: 280px; }
+
+    /* ======================== TABLES ======================== */
+    .table-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .table-header {
+      padding: 24px 28px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .table-header .chart-title { margin-bottom: 4px; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead th {
+      padding: 12px 20px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--dim);
+      background: rgba(255,255,255,0.02);
+      border-bottom: 1px solid var(--border);
+    }
+
+    tbody tr {
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      transition: background 0.15s;
+    }
+
+    tbody tr:nth-child(even) { background: rgba(255,255,255,0.015); }
+    tbody tr:hover { background: rgba(124,58,237,0.08); }
+
+    tbody td {
+      padding: 14px 20px;
+      font-size: 13px;
+      color: var(--muted);
+      vertical-align: middle;
+    }
+
+    tbody td:first-child { color: var(--text); font-weight: 500; }
+
+    .likes-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: rgba(225,48,108,0.12);
+      color: var(--ig);
+      font-size: 12px;
+      font-weight: 600;
+      border: 1px solid rgba(225,48,108,0.2);
+    }
+
+    .views-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: rgba(255,0,0,0.1);
+      color: #ff6b6b;
+      font-size: 12px;
+      font-weight: 600;
+      border: 1px solid rgba(255,0,0,0.2);
+    }
+
+    /* ======================== INSIGHTS ======================== */
+    .insights-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 800px) { .insights-grid { grid-template-columns: 1fr; } }
+
+    .insight-card {
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 24px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .insight-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(124,58,237,0.05), rgba(236,72,153,0.05));
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .insight-card:hover { transform: translateY(-4px); box-shadow: 0 24px 50px rgba(0,0,0,0.4); }
+    .insight-card:hover::after { opacity: 1; }
+
+    .insight-icon {
+      font-size: 36px;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .insight-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .insight-text {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ======================== OPPORTUNITIES ======================== */
+    .opps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 1000px) { .opps-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .opps-grid { grid-template-columns: 1fr; } }
+
+    .opp-card {
+      background: var(--card);
+      border: 1px solid rgba(251,191,36,0.2);
+      border-radius: 16px;
+      padding: 24px;
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .opp-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+    }
+
+    /* Accent top-border per card */
+    .opp-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      border-radius: 16px 16px 0 0;
+    }
+
+    .opp-card.accent-blue::before   { background: linear-gradient(90deg, #3b82f6, #69c9d0); }
+    .opp-card.accent-red::before    { background: linear-gradient(90deg, #ef4444, #ff6b6b); }
+    .opp-card.accent-gold::before   { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+    .opp-card.accent-green::before  { background: linear-gradient(90deg, #10b981, #34d399); }
+    .opp-card.accent-purple::before { background: linear-gradient(90deg, #7c3aed, #a78bfa); }
+    .opp-card.accent-teal::before   { background: linear-gradient(90deg, #0891b2, #22d3ee); }
+
+    .opp-card.accent-blue   { border-color: rgba(59,130,246,0.25); }
+    .opp-card.accent-red    { border-color: rgba(239,68,68,0.25); }
+    .opp-card.accent-gold   { border-color: rgba(245,158,11,0.25); }
+    .opp-card.accent-green  { border-color: rgba(16,185,129,0.25); }
+    .opp-card.accent-purple { border-color: rgba(124,58,237,0.25); }
+    .opp-card.accent-teal   { border-color: rgba(8,145,178,0.25); }
+
+    .opp-card.accent-blue:hover   { box-shadow: 0 20px 50px rgba(59,130,246,0.1); border-color: rgba(59,130,246,0.45); }
+    .opp-card.accent-red:hover    { box-shadow: 0 20px 50px rgba(239,68,68,0.1); border-color: rgba(239,68,68,0.45); }
+    .opp-card.accent-gold:hover   { box-shadow: 0 20px 50px rgba(245,158,11,0.1); border-color: rgba(245,158,11,0.45); }
+    .opp-card.accent-green:hover  { box-shadow: 0 20px 50px rgba(16,185,129,0.1); border-color: rgba(16,185,129,0.45); }
+    .opp-card.accent-purple:hover { box-shadow: 0 20px 50px rgba(124,58,237,0.1); border-color: rgba(124,58,237,0.45); }
+    .opp-card.accent-teal:hover   { box-shadow: 0 20px 50px rgba(8,145,178,0.1); border-color: rgba(8,145,178,0.45); }
+
+    .opp-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      gap: 8px;
+    }
+
+    .opp-category-tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .opp-category-tag.blue   { background: rgba(59,130,246,0.15); color: #93c5fd; border: 1px solid rgba(59,130,246,0.3); }
+    .opp-category-tag.red    { background: rgba(239,68,68,0.15); color: #fca5a5; border: 1px solid rgba(239,68,68,0.3); }
+    .opp-category-tag.gold   { background: rgba(245,158,11,0.15); color: #fbbf24; border: 1px solid rgba(245,158,11,0.3); }
+    .opp-category-tag.green  { background: rgba(16,185,129,0.15); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.3); }
+    .opp-category-tag.purple { background: rgba(124,58,237,0.15); color: #c4b5fd; border: 1px solid rgba(124,58,237,0.3); }
+    .opp-category-tag.teal   { background: rgba(8,145,178,0.15); color: #67e8f9; border: 1px solid rgba(8,145,178,0.3); }
+
+    .opp-icon-wrap {
+      font-size: 28px;
+      line-height: 1;
+    }
+
+    .opp-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+
+    .opp-bullets {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      flex: 1;
+    }
+
+    .opp-bullets li {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.55;
+      padding-left: 14px;
+      position: relative;
+    }
+
+    .opp-bullets li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: var(--dim);
+      font-size: 10px;
+      top: 2px;
+    }
+
+    .opp-footer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+
+    .opp-impact {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .opp-impact.alto       { background: rgba(239,68,68,0.15); color: #fca5a5; border: 1px solid rgba(239,68,68,0.3); }
+    .opp-impact.muy-alto   { background: rgba(245,158,11,0.18); color: #fbbf24; border: 1px solid rgba(245,158,11,0.35); }
+    .opp-impact.medio-alto { background: rgba(16,185,129,0.15); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.3); }
+
+    /* ======================== OPP EXPANDED ======================== */
+    .opp-context {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 16px;
+      padding: 12px 14px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 8px;
+      border-left: 3px solid rgba(255,255,255,0.1);
+    }
+    .opp-steps-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--dim);
+      margin: 16px 0 8px;
+    }
+    .opp-steps {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .opp-steps li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .opp-step-num {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.07);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--muted);
+      margin-top: 1px;
+    }
+    .opp-kpis {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .opp-kpi {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 12px;
+    }
+    .opp-kpi-val {
+      font-size: 16px;
+      font-weight: 800;
+      color: #fff;
+      display: block;
+      line-height: 1.2;
+    }
+    .opp-kpi-label {
+      color: var(--dim);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 2px;
+      display: block;
+    }
+    .opp-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+    .opp-timeline {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      color: var(--muted);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .opp-priority {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .opp-priority.p1 { background: rgba(239,68,68,0.15); color: #fca5a5; border: 1px solid rgba(239,68,68,0.3); }
+    .opp-priority.p2 { background: rgba(245,158,11,0.15); color: #fbbf24; border: 1px solid rgba(245,158,11,0.3); }
+    .opp-priority.p3 { background: rgba(99,102,241,0.15); color: #a5b4fc; border: 1px solid rgba(99,102,241,0.3); }
+    .opp-tools {
+      font-size: 11px;
+      color: var(--dim);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+    .opp-tool-tag {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 4px;
+      padding: 2px 7px;
+      font-size: 10px;
+      color: var(--dim);
+    }
+
+    /* ======================== ROADMAP ======================== */
+    .roadmap-section { margin-top: 16px; }
+    .roadmap-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 900px) { .roadmap-grid { grid-template-columns: 1fr; } }
+    .roadmap-phase {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+    }
+    .roadmap-phase-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--dim);
+      margin-bottom: 6px;
+    }
+    .roadmap-phase-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+    .roadmap-item {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .roadmap-item:last-child { border-bottom: none; }
+    .roadmap-dot {
+      flex-shrink: 0;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-top: 5px;
+    }
+    .dot-red { background: #ef4444; }
+    .dot-amber { background: #f59e0b; }
+    .dot-green { background: #10b981; }
+    .roadmap-phase-kpi {
+      margin-top: 16px;
+      padding: 12px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 10px;
+      text-align: center;
+    }
+    .roadmap-phase-kpi-val {
+      font-size: 22px;
+      font-weight: 900;
+      color: #fff;
+    }
+    .roadmap-phase-kpi-label {
+      font-size: 11px;
+      color: var(--dim);
+      margin-top: 2px;
+    }
+
+    /* ======================== FOOTER ======================== */
+    .footer {
+      padding: 48px 0 40px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      margin-top: 32px;
+    }
+
+    .footer-logo {
+      font-size: 28px;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--purple), var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -1px;
+      margin-bottom: 12px;
+    }
+
+    .footer-text {
+      font-size: 13px;
+      color: var(--dim);
+    }
+
+    .footer-text strong { color: var(--muted); }
+
+    /* ======================== DIVIDER ======================== */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      margin: 8px 0;
+    }
+
+    /* ======================== COUNTER ======================== */
+    .counter { display: inline-block; }
+
+    /* ======================== CLICKABLE LINKS ======================== */
+    table a, .platform-card a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    table a:hover {
+      color: #a78bfa;
+      text-decoration: underline;
+    }
+    .platform-card a {
+      display: block;
+    }
+    table a::after {
+      content: ' ↗';
+      font-size: 0.85em;
+      opacity: 0.6;
+    }
+
+    /* ======================== CHART HINT ======================== */
+    .chart-hint {
+      font-size: 11px;
+      color: var(--dim);
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: rgba(124,58,237,0.4); border-radius: 3px; }
+
+    /* Fade-in animation */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in { animation: fadeInUp 0.6s ease forwards; }
+    .fade-in-1 { animation-delay: 0.1s; opacity: 0; }
+    .fade-in-2 { animation-delay: 0.2s; opacity: 0; }
+    .fade-in-3 { animation-delay: 0.3s; opacity: 0; }
+    .fade-in-4 { animation-delay: 0.4s; opacity: 0; }
+    .fade-in-5 { animation-delay: 0.5s; opacity: 0; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ======================== HERO ======================== -->
+  <header class="hero fade-in fade-in-1">
+    <div class="hero-avatar">
+      OVI
+      <span class="verified-badge">✓</span>
+    </div>
+    <h1 class="hero-title">OVI</h1>
+    <p class="hero-handle"><span>@ovi_oficial</span> &nbsp;·&nbsp; Artista de Música Latina</p>
+    <p class="hero-subtitle">Reporte de Analítica Multi-Plataforma &nbsp;·&nbsp; Marzo 2026</p>
+    <div class="hero-tags">
+      <span class="tag ig">Instagram ✓ Verificado</span>
+      <span class="tag tt">TikTok</span>
+      <span class="tag yt">YouTube</span>
+      <span class="tag fb">Facebook</span>
+      <span class="tag">Música Latina</span>
+      <span class="tag">Reggaetón</span>
+    </div>
+  </header>
+
+  <!-- ======================== OVERVIEW STRIP ======================== -->
+  <section class="fade-in fade-in-2">
+    <div class="section-label">Resumen de Desempeño</div>
+    <div class="section-title">Métricas <span class="accent">Clave</span></div>
+    <div class="overview-grid">
+      <div class="overview-card">
+        <span class="ov-icon">🌍</span>
+        <div class="ov-value"><span class="counter" data-target="7500000" data-suffix="M+" data-divisor="1000000" data-decimals="1">0</span></div>
+        <div class="ov-label">Alcance Total Multi-Plataforma</div>
+        <div class="ov-sub">Instagram + TikTok + YouTube + Facebook</div>
+      </div>
+      <div class="overview-card">
+        <span class="ov-icon">▶️</span>
+        <div class="ov-value"><span class="counter" data-target="460000000" data-suffix="M+" data-divisor="1000000" data-decimals="0">0</span></div>
+        <div class="ov-label">Vistas Totales en YouTube</div>
+        <div class="ov-sub">En 43 videos publicados</div>
+      </div>
+      <div class="overview-card">
+        <span class="ov-icon">❤️</span>
+        <div class="ov-value"><span class="counter" data-target="42700000" data-suffix="M" data-divisor="1000000" data-decimals="1">0</span></div>
+        <div class="ov-label">Corazones Totales en TikTok</div>
+        <div class="ov-sub">153 videos publicados</div>
+      </div>
+      <div class="overview-card">
+        <span class="ov-icon">⭐</span>
+        <div class="ov-value"><span class="counter" data-target="98" data-suffix="%" data-divisor="1" data-decimals="0">0</span></div>
+        <div class="ov-label">Calificación de Audiencia en Facebook</div>
+        <div class="ov-sub">414K+ seguidores en Facebook</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== PLATFORM BREAKDOWN ======================== -->
+  <section class="fade-in fade-in-3">
+    <div class="section-label">Desglose por Plataforma</div>
+    <div class="section-title">Distribución de <span class="accent">Audiencia</span></div>
+    <div class="platforms-grid">
+
+      <!-- Instagram -->
+      <div class="platform-card ig">
+        <div class="platform-header">
+          <div class="platform-icon ig">📷</div>
+          <div>
+            <div class="platform-name"><a href="https://www.instagram.com/ovi_oficial/" target="_blank" rel="noopener">Instagram</a></div>
+            <span class="platform-verified">✓ Verificado</span>
+          </div>
+        </div>
+        <div class="platform-stat">
+          <div class="stat-val">3.3M</div>
+          <div class="stat-label">Seguidores</div>
+        </div>
+        <div class="platform-details">
+          <div class="detail-row"><span>Publicaciones</span><span>100</span></div>
+          <div class="detail-row"><span>Promedio Me Gustas / Reel</span><span>166K</span></div>
+          <div class="detail-row"><span>Me Gustas en Post Top</span><span>713.9K</span></div>
+          <div class="detail-row"><span>Verificación</span><span style="color:var(--ig)">✓ Verificado</span></div>
+        </div>
+      </div>
+
+      <!-- TikTok -->
+      <div class="platform-card tt">
+        <div class="platform-header">
+          <div class="platform-icon tt">🎵</div>
+          <div>
+            <div class="platform-name"><a href="https://www.tiktok.com/@ovi_oficial" target="_blank" rel="noopener">TikTok</a></div>
+          </div>
+        </div>
+        <div class="platform-stat">
+          <div class="stat-val">3.1M</div>
+          <div class="stat-label">Seguidores</div>
+        </div>
+        <div class="platform-details">
+          <div class="detail-row"><span>Videos</span><span>153</span></div>
+          <div class="detail-row"><span>Corazones Totales</span><span>42.7M</span></div>
+          <div class="detail-row"><span>Reproducciones Top Video</span><span>18M</span></div>
+          <div class="detail-row"><span>Verificación</span><span style="color:#fbbf24">Sin Verificar</span></div>
+        </div>
+      </div>
+
+      <!-- YouTube -->
+      <div class="platform-card yt">
+        <div class="platform-header">
+          <div class="platform-icon yt">▶</div>
+          <div>
+            <div class="platform-name"><a href="https://www.youtube.com/@ovi.oficial" target="_blank" rel="noopener">YouTube</a></div>
+          </div>
+        </div>
+        <div class="platform-stat">
+          <div class="stat-val">723K</div>
+          <div class="stat-label">Suscriptores</div>
+        </div>
+        <div class="platform-details">
+          <div class="detail-row"><span>Videos</span><span>43</span></div>
+          <div class="detail-row"><span>Vistas Totales</span><span>460M+</span></div>
+          <div class="detail-row"><span>Promedio Vistas / Video</span><span>10.7M</span></div>
+          <div class="detail-row"><span>Verificación</span><span style="color:#fbbf24">Sin Verificar</span></div>
+        </div>
+      </div>
+
+      <!-- Facebook -->
+      <div class="platform-card fb">
+        <div class="platform-header">
+          <div class="platform-icon fb">f</div>
+          <div>
+            <div class="platform-name"><a href="https://www.facebook.com/ovioficial" target="_blank" rel="noopener">Facebook</a></div>
+          </div>
+        </div>
+        <div class="platform-stat">
+          <div class="stat-val">414K</div>
+          <div class="stat-label">Seguidores</div>
+        </div>
+        <div class="platform-details">
+          <div class="detail-row"><span>Categoría</span><span>Músico/Banda</span></div>
+          <div class="detail-row"><span>Calificación de Audiencia</span><span>98%</span></div>
+          <div class="detail-row"><span>Anuncios Activos</span><span style="color:#fbbf24">Ninguno</span></div>
+          <div class="detail-row"><span>Engagement</span><span>Alto</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================== CHARTS ======================== -->
+  <section class="fade-in fade-in-3">
+    <div class="section-label">Visualización de Datos</div>
+    <div class="section-title">Gráficas de <span class="accent">Analítica</span></div>
+    <div class="charts-grid">
+
+      <!-- YouTube Top Videos Bar -->
+      <div class="chart-card">
+        <div class="chart-title">Top Videos de YouTube por Vistas</div>
+        <div class="chart-sub">Vistas totales por video publicado (ordenado de mayor a menor)</div>
+        <div class="chart-wrap tall">
+          <canvas id="ytChart"></canvas>
+        </div>
+        <p class="chart-hint">Haz clic en las barras para abrir el post ↗</p>
+      </div>
+
+      <!-- Follower Doughnut -->
+      <div class="chart-card" style="display:flex;flex-direction:column;justify-content:space-between;">
+        <div>
+          <div class="chart-title">Distribución de Seguidores</div>
+          <div class="chart-sub">Desglose de audiencia multi-plataforma — total 7.53M+</div>
+        </div>
+        <div class="chart-wrap doughnut" style="display:flex;align-items:center;justify-content:center;">
+          <canvas id="doughnutChart"></canvas>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px;">
+          <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);">
+            <span style="width:12px;height:12px;border-radius:50%;background:var(--ig);display:inline-block;flex-shrink:0;"></span>Instagram — 3.3M
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);">
+            <span style="width:12px;height:12px;border-radius:50%;background:var(--tt);display:inline-block;flex-shrink:0;"></span>TikTok — 3.1M
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);">
+            <span style="width:12px;height:12px;border-radius:50%;background:var(--yt);display:inline-block;flex-shrink:0;"></span>YouTube — 723K
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);">
+            <span style="width:12px;height:12px;border-radius:50%;background:var(--fb);display:inline-block;flex-shrink:0;"></span>Facebook — 414K
+          </div>
+        </div>
+      </div>
+
+      <!-- TikTok Top Videos Bar -->
+      <div class="chart-card">
+        <div class="chart-title">Top Videos de TikTok por Reproducciones</div>
+        <div class="chart-sub">Ventana de 30 días recientes — top 6 clips con mejor desempeño</div>
+        <div class="chart-wrap">
+          <canvas id="ttChart"></canvas>
+        </div>
+        <p class="chart-hint">Haz clic en las barras para abrir el post ↗</p>
+      </div>
+
+      <!-- Instagram Reels Bar -->
+      <div class="chart-card">
+        <div class="chart-title">Top Reels de Instagram por Reproducciones</div>
+        <div class="chart-sub">Reels con más vistas en @ovi_oficial</div>
+        <div class="chart-wrap">
+          <canvas id="igChart"></canvas>
+        </div>
+        <p class="chart-hint">Haz clic en las barras para abrir el post ↗</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================== TOP POSTS TABLE ======================== -->
+  <section class="fade-in fade-in-4">
+    <div class="section-label">Desempeño en Instagram</div>
+    <div class="section-title">Mejores <span class="accent">Publicaciones</span> en Instagram</div>
+    <div class="table-card">
+      <div class="table-header">
+        <div class="chart-title">Publicaciones con Más Me Gustas en Instagram</div>
+        <div class="chart-sub">Basado en datos de engagement recopilados el 18 de marzo de 2026</div>
+      </div>
+      <div style="overflow-x:auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Publicación / Descripción</th>
+              <th>Me Gustas</th>
+              <th>Vistas</th>
+              <th>Fecha</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="color:var(--dim)">01</td>
+              <td><a href="https://www.instagram.com/p/C_vwXMkvuYw/" target="_blank" rel="noopener">Disney kids 🏰</a></td>
+              <td><span class="likes-pill">♥ 713,910</span></td>
+              <td><span style="color:var(--dim)">—</span></td>
+              <td style="color:var(--dim)">Sep 2024</td>
+            </tr>
+            <tr>
+              <td style="color:var(--dim)">02</td>
+              <td><a href="https://www.instagram.com/p/CmKU5ERJvJG/" target="_blank" rel="noopener">Superación (video)</a></td>
+              <td><span class="likes-pill">♥ 574,600</span></td>
+              <td><span class="views-pill">▶ 7.1M</span></td>
+              <td style="color:var(--dim)">Dic 2022</td>
+            </tr>
+            <tr>
+              <td style="color:var(--dim)">03</td>
+              <td><a href="https://www.instagram.com/p/DLTDcL4AW_y/" target="_blank" rel="noopener">Rockstar teaser</a></td>
+              <td><span class="likes-pill">♥ 548,088</span></td>
+              <td><span style="color:var(--dim)">—</span></td>
+              <td style="color:var(--dim)">Jun 2025</td>
+            </tr>
+            <tr>
+              <td style="color:var(--dim)">04</td>
+              <td><a href="https://www.instagram.com/p/DGwSLnHSUz0/" target="_blank" rel="noopener">LA 🌴</a></td>
+              <td><span class="likes-pill">♥ 472,668</span></td>
+              <td><span style="color:var(--dim)">—</span></td>
+              <td style="color:var(--dim)">Mar 2025</td>
+            </tr>
+            <tr>
+              <td style="color:var(--dim)">05</td>
+              <td><a href="https://www.instagram.com/p/C38uN7xOEoE/" target="_blank" rel="noopener">ft Colombia 🇨🇴🇨🇺</a></td>
+              <td><span class="likes-pill">♥ 452,963</span></td>
+              <td><span style="color:var(--dim)">—</span></td>
+              <td style="color:var(--dim)">Feb 2024</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== YOUTUBE TOP VIDEOS TABLE ======================== -->
+  <section class="fade-in fade-in-4" style="padding-top:0;">
+    <div class="section-label">Desempeño en YouTube</div>
+    <div class="section-title">Top <span class="accent">Videos</span> de YouTube</div>
+    <div class="table-card">
+      <div class="table-header">
+        <div class="chart-title">Videos con Más Vistas en YouTube</div>
+        <div class="chart-sub">Ordenado por total de reproducciones · Canal @ovi_oficial</div>
+      </div>
+      <div style="overflow-x:auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Título</th>
+              <th>Vistas</th>
+              <th>Me Gustas</th>
+              <th>Comentarios</th>
+              <th>Fecha</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="color:var(--dim)">01</td>
+              <td><a href="https://www.youtube.com/watch?v=fnYHdE7caAg" target="_blank" rel="noopener">Los Rockstar No Van al Cielo</a></td>
+              <td><span class="views-pill">▶ 31.4M</span></td>
+              <td>—</td>
+              <td>—</td>
+              <td style="color:var(--dim)">2023</td>
+            </tr>
+            <tr>
+              <td style="color:var(--dim)">02</td>
+              <td><a href="https://www.youtube.com/watch?v=GEBHaXXhWLY" target="_blank" rel="noopener">A Los 16</a></td>
+              <td><span class="views-pill">▶ 24.1M</span></td>
+              <td>—</td>
+              <td>—</td>
+              <td style="color:var(--dim)">2022</td>
+            </tr>
+            <tr>
+              <td style="color:var(--dim)">03</td>
+              <td><a href="https://www.youtube.com/watch?v=9JK5ZpSJ-ZU" target="_blank" rel="noopener">HALLANDALE (Hades 66)</a></td>
+              <td><span class="views-pill">▶ 16.4M</span></td>
+              <td>—</td>
+              <td>—</td>
+              <td style="color:var(--dim)">2023</td>
+            </tr>
+            <tr>
+              <td style="color:var(--dim)">04</td>
+              <td><a href="https://www.youtube.com/watch?v=uzerskEb8jw" target="_blank" rel="noopener">Mientras No Vuelves</a></td>
+              <td><span class="views-pill">▶ 10.4M</span></td>
+              <td>—</td>
+              <td>—</td>
+              <td style="color:var(--dim)">2022</td>
+            </tr>
+            <tr>
+              <td style="color:var(--dim)">05</td>
+              <td><a href="https://www.youtube.com/watch?v=P9QFO5--b_I" target="_blank" rel="noopener">Historia Real</a></td>
+              <td><span class="views-pill">▶ 6.7M</span></td>
+              <td>—</td>
+              <td>—</td>
+              <td style="color:var(--dim)">2023</td>
+            </tr>
+            <tr>
+              <td style="color:var(--dim)">06</td>
+              <td><a href="https://www.youtube.com/watch?v=T-k1i5_yS50" target="_blank" rel="noopener">Al Otro Nivel</a></td>
+              <td><span class="views-pill">▶ 5.5M</span></td>
+              <td>—</td>
+              <td>—</td>
+              <td style="color:var(--dim)">2024</td>
+            </tr>
+            <tr>
+              <td style="color:var(--dim)">07</td>
+              <td><a href="https://www.youtube.com/watch?v=UqHU7ENb4FQ" target="_blank" rel="noopener">Nada es Como Antes</a></td>
+              <td><span class="views-pill">▶ 4.3M</span></td>
+              <td>—</td>
+              <td>—</td>
+              <td style="color:var(--dim)">2024</td>
+            </tr>
+            <tr>
+              <td style="color:var(--dim)">08</td>
+              <td><a href="https://www.youtube.com/watch?v=ntPf7r2vebU" target="_blank" rel="noopener">Así Moriré</a></td>
+              <td><span class="views-pill">▶ 4.2M</span></td>
+              <td>—</td>
+              <td>—</td>
+              <td style="color:var(--dim)">2024</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================== KEY INSIGHTS ======================== -->
+  <section class="fade-in fade-in-4">
+    <div class="section-label">Análisis</div>
+    <div class="section-title">Conclusiones <span class="accent">Clave</span></div>
+    <div class="insights-grid">
+
+      <div class="insight-card">
+        <span class="insight-icon">📺</span>
+        <div class="insight-title">YouTube como Motor Principal</div>
+        <div class="insight-text">460M+ de vistas totales en apenas 43 videos posicionan a OVI con un excepcional promedio de <strong style="color:#fff">10.7M de vistas por video</strong>. Este ratio señala un fuerte posicionamiento SEO, listas de reproducción activas y amplificación algorítmica que supera la base de suscriptores.</div>
+      </div>
+
+      <div class="insight-card">
+        <span class="insight-icon">🤝</span>
+        <div class="insight-title">Las Colaboraciones Generan Picos de Audiencia</div>
+        <div class="insight-text">El contenido más exitoso en las cuatro plataformas presenta consistentemente colaboraciones con artistas latinos destacados. Los features y lanzamientos conjuntos funcionan como <strong style="color:#fff">embudos de audiencia cruzada</strong>, disparando seguidores y picos de engagement tras cada lanzamiento.</div>
+      </div>
+
+      <div class="insight-card">
+        <span class="insight-icon">🎭</span>
+        <div class="insight-title">El Contenido Lifestyle Supera a la Música en TikTok</div>
+        <div class="insight-text">"Pinche alíen" (18M reproducciones) superó ampliamente los lanzamientos musicales oficiales en la ventana de 30 días reciente. El <strong style="color:#fff">contenido lifestyle auténtico y espontáneo</strong> conecta más con el FYP de TikTok que las promos musicales elaboradas, sugiriendo un ajuste en la mezcla de contenido.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================== OPPORTUNITIES ======================== -->
+  <section class="fade-in fade-in-5">
+    <div class="section-label">Estrategia de Crecimiento</div>
+    <div class="section-title">Oportunidades de <span class="accent">Crecimiento</span> Detalladas</div>
+    <div class="opps-grid">
+
+      <!-- ===== OPP 1: YouTube Shorts ===== -->
+      <div class="opp-card accent-red">
+        <div class="opp-header">
+          <span class="opp-category-tag red">🔥 Urgente</span>
+          <span class="opp-icon-wrap">📱</span>
+        </div>
+        <div class="opp-title">YouTube Shorts — El Canal sin Explotar más Grande</div>
+        <div class="opp-context">
+          OVI tiene <strong style="color:#fff">43 videos en YouTube con 460M+ vistas</strong>, pero <strong style="color:#fca5a5">CERO Shorts publicados</strong>. YouTube actualmente prioriza los Shorts en su algoritmo de distribución, ofreciendo el mayor alcance orgánico gratuito disponible. Cada TikTok viral puede reciclarse como Short en menos de 5 minutos.
+        </div>
+        <div class="opp-steps-title">📋 Plan de Acción Paso a Paso</div>
+        <ul class="opp-steps">
+          <li><span class="opp-step-num">1</span>Auditar los 153 TikToks existentes e identificar los 20 clips con mejor ratio engagement/duración (menos de 60 seg.)</li>
+          <li><span class="opp-step-num">2</span>Retirar el watermark de TikTok usando SnapTik o CapCut y añadir subtítulos en español e inglés para ambos mercados</li>
+          <li><span class="opp-step-num">3</span>Publicar 1 Short diario durante las primeras 2 semanas para activar el algoritmo de distribución de Shorts</li>
+          <li><span class="opp-step-num">4</span>Optimizar títulos con palabras clave: nombre del artista + nombre de la canción + género (ej: "OVI - Rockstar #reggaeton #musiclatina")</li>
+          <li><span class="opp-step-num">5</span>Usar el panel de YouTube Analytics para identificar qué Shorts generan suscriptores nuevos vs. solo vistas, y duplicar ese formato</li>
+          <li><span class="opp-step-num">6</span>Crear Shorts exclusivos de behind-the-scenes, reacciones a comentarios y "retos" para generar contenido original que no está en TikTok</li>
+        </ul>
+        <div class="opp-kpis">
+          <div class="opp-kpi"><span class="opp-kpi-val">+200K</span><span class="opp-kpi-label">Suscriptores en 90 días</span></div>
+          <div class="opp-kpi"><span class="opp-kpi-val">50M+</span><span class="opp-kpi-label">Vistas adicionales / mes</span></div>
+          <div class="opp-kpi"><span class="opp-kpi-val">$0</span><span class="opp-kpi-label">Inversión requerida</span></div>
+        </div>
+        <div class="opp-tools">🛠 Herramientas: <span class="opp-tool-tag">CapCut</span><span class="opp-tool-tag">YouTube Studio</span><span class="opp-tool-tag">SnapTik</span><span class="opp-tool-tag">TubeBuddy</span></div>
+        <div class="opp-meta">
+          <span class="opp-impact muy-alto">Impacto: Muy Alto</span>
+          <span class="opp-priority p1">⚡ Prioridad #1</span>
+          <span class="opp-timeline">⏱ Semanas 1–12</span>
+        </div>
+      </div>
+
+      <!-- ===== OPP 2: Facebook Ads ===== -->
+      <div class="opp-card accent-gold">
+        <div class="opp-header">
+          <span class="opp-category-tag gold">💰 Monetización</span>
+          <span class="opp-icon-wrap">🎯</span>
+        </div>
+        <div class="opp-title">Campañas de Meta Ads para Amplificar Lanzamientos</div>
+        <div class="opp-context">
+          OVI tiene <strong style="color:#fff">414K seguidores en Facebook y 3.3M en Instagram</strong> pero actualmente <strong style="color:#fbbf24">no corre ningún anuncio pagado</strong>. El mercado hispano en Meta (EE.UU. + LATAM) es uno de los más baratos por CPM con altísima afinidad musical. Cada lanzamiento de sencillo sin publicidad pierde entre el 60–80% de su alcance potencial.
+        </div>
+        <div class="opp-steps-title">📋 Plan de Campaña por Lanzamiento</div>
+        <ul class="opp-steps">
+          <li><span class="opp-step-num">1</span><strong style="color:#fff">Pre-lanzamiento (72h antes):</strong> Campaña de Awareness con el teaser del sencillo. Objetivo: alcance máximo. Presupuesto: $200 USD. Audiencia: fans similares a Bad Bunny, Anuel AA, Myke Towers, 18–35 años, EE.UU. + MX + CO + PR.</li>
+          <li><span class="opp-step-num">2</span><strong style="color:#fff">Día de lanzamiento:</strong> Campaña de Conversión hacia Spotify/Apple Music o YouTube. Presupuesto: $300 USD. Formato: Reel de 15 seg + CTA "Escúchalo ahora".</li>
+          <li><span class="opp-step-num">3</span><strong style="color:#fff">Semana 1–2 post-lanzamiento:</strong> Retargeting a quienes interactuaron con el video pero no hicieron clic. Presupuesto: $200 USD. CPC objetivo: menos de $0.15 USD.</li>
+          <li><span class="opp-step-num">4</span>Instalar el Meta Pixel en el sitio web/Linktree de OVI para medir conversiones y construir audiencias Custom desde fans reales.</li>
+          <li><span class="opp-step-num">5</span>Crear una Lookalike Audience del 1% basada en los seguidores más activos de la página de Facebook para escalar campaigns futuras.</li>
+        </ul>
+        <div class="opp-kpis">
+          <div class="opp-kpi"><span class="opp-kpi-val">5–8x</span><span class="opp-kpi-label">ROAS estimado en streams</span></div>
+          <div class="opp-kpi"><span class="opp-kpi-val">$0.08</span><span class="opp-kpi-label">CPM hispano estimado</span></div>
+          <div class="opp-kpi"><span class="opp-kpi-val">$700</span><span class="opp-kpi-label">Budget por lanzamiento</span></div>
+        </div>
+        <div class="opp-tools">🛠 Herramientas: <span class="opp-tool-tag">Meta Ads Manager</span><span class="opp-tool-tag">Meta Business Suite</span><span class="opp-tool-tag">Meta Pixel</span><span class="opp-tool-tag">Canva Ads</span></div>
+        <div class="opp-meta">
+          <span class="opp-impact muy-alto">Impacto: Muy Alto</span>
+          <span class="opp-priority p1">⚡ Prioridad #2</span>
+          <span class="opp-timeline">⏱ Por cada lanzamiento</span>
+        </div>
+      </div>
+
+      <!-- ===== OPP 3: Colaboraciones ===== -->
+      <div class="opp-card accent-purple">
+        <div class="opp-header">
+          <span class="opp-category-tag purple">🤝 Crecimiento</span>
+          <span class="opp-icon-wrap">🌍</span>
+        </div>
+        <div class="opp-title">Mapa de Colaboraciones Estratégico por Mercado</div>
+        <div class="opp-context">
+          El 100% de los videos con más de 10M de vistas en YouTube son colaboraciones. <strong style="color:#fff">"Los Rockstar No Van al Cielo" (31M), "A Los 16" (24M) y "HALLANDALE" (16M)</strong> son todos features. Sin embargo, no existe una cadencia planificada: las collabs ocurren de forma oportunista. Una estrategia trimestral por mercado puede duplicar el alcance en 12 meses.
+        </div>
+        <div class="opp-steps-title">📋 Roadmap de Colaboraciones por Región</div>
+        <ul class="opp-steps">
+          <li><span class="opp-step-num">1</span><strong style="color:#fff">Q2 2026 — México:</strong> Artista objetivo con 5M–15M de seguidores en un género complementario (trap mexicano, corridos tumbados). Formato: sencillo + serie de contenido de "proceso creativo" en Instagram Stories y TikTok (3 episodios).</li>
+          <li><span class="opp-step-num">2</span><strong style="color:#fff">Q3 2026 — Colombia/Argentina:</strong> Colaboración con artista urbano emergente del género bienechor o RKT. Aprovechar el algoritmo de Spotify que impulsa collabs entre artistas de países distintos.</li>
+          <li><span class="opp-step-num">3</span><strong style="color:#fff">Q4 2026 — Mercado Bilingüe (EE.UU.):</strong> Feature con artista de Miami o Nueva York que mezcle español e inglés. Objetivo: posicionarse en playlists de Spotify US y Apple Music US.</li>
+          <li><span class="opp-step-num">4</span>Para cada collab, crear contenido de "anticipación": countdown en Instagram Stories, videos de estudio en TikTok, live conjunto de anuncio en Facebook.</li>
+          <li><span class="opp-step-num">5</span>Negociar con los artistas colaboradores que publiquen el contenido simultáneamente en sus cuentas para maximalizar el intercambio de audiencias.</li>
+        </ul>
+        <div class="opp-kpis">
+          <div class="opp-kpi"><span class="opp-kpi-val">+500K</span><span class="opp-kpi-label">Seguidores nuevos / collab</span></div>
+          <div class="opp-kpi"><span class="opp-kpi-val">20M+</span><span class="opp-kpi-label">Streams Spotify estimados</span></div>
+          <div class="opp-kpi"><span class="opp-kpi-val">3</span><span class="opp-kpi-label">Collabs objetivo por año</span></div>
+        </div>
+        <div class="opp-tools">🛠 Herramientas: <span class="opp-tool-tag">Spotify for Artists</span><span class="opp-tool-tag">TuneCore</span><span class="opp-tool-tag">DistroKid</span><span class="opp-tool-tag">Chartmetric</span></div>
+        <div class="opp-meta">
+          <span class="opp-impact muy-alto">Impacto: Muy Alto</span>
+          <span class="opp-priority p1">⚡ Prioridad #3</span>
+          <span class="opp-timeline">⏱ Trimestral / 12 meses</span>
+        </div>
+      </div>
+
+      <!-- ===== OPP 4: YouTube Monetización ===== -->
+      <div class="opp-card accent-red">
+        <div class="opp-header">
+          <span class="opp-category-tag red">💸 Revenue</span>
+          <span class="opp-icon-wrap">▶️</span>
+        </div>
+        <div class="opp-title">Monetización Avanzada de YouTube — 5 Fuentes de Ingreso</div>
+        <div class="opp-context">
+          Con <strong style="color:#fff">460M+ de vistas totales y 723K suscriptores</strong>, el canal de OVI está generando ingresos, pero probablemente solo por AdSense básico. Existen 4 fuentes adicionales de monetización de YouTube completamente disponibles con su tamaño de canal que podrían triplicar el ingreso por plataforma.
+        </div>
+        <div class="opp-steps-title">📋 Las 5 Fuentes de Monetización</div>
+        <ul class="opp-steps">
+          <li><span class="opp-step-num">1</span><strong style="color:#fff">YouTube AdSense (activo):</strong> Estimado actual $9,200–$13,800 USD/mes con 460M vistas acumuladas y CPM de $1.5–$3 para contenido musical hispano. Optimizar con mid-roll ads en videos de +8 minutos.</li>
+          <li><span class="opp-step-num">2</span><strong style="color:#fff">Canal de Membresías:</strong> Activar "Únete al Canal" desde YouTube Studio. Crear 3 niveles: Fan ($/1.99 USD), VIP ($/4.99 USD), Backstage ($/9.99 USD) con perks exclusivos: emojis personalizados, insignias, contenido anticipado, lives privados mensuales.</li>
+          <li><span class="opp-step-num">3</span><strong style="color:#fff">Super Thanks / Super Chats:</strong> Activar donaciones en videos y transmisiones en vivo. Los artistas musicales reciben en promedio $500–$2,000 USD por live con audiencia de 5K+ viewers.</li>
+          <li><span class="opp-step-num">4</span><strong style="color:#fff">YouTube Shopping:</strong> Conectar tienda de merchandise (camisetas, hoodies, gorras con logo OVI) directamente al canal. La tienda aparece debajo de cada video como botón de compra.</li>
+          <li><span class="opp-step-num">5</span><strong style="color:#fff">YouTube BrandConnect:</strong> Registrarse en YouTube BrandConnect para recibir propuestas de patrocinio de marcas que buscan artistas latinos. Con 723K suscriptores el rate card puede ser $5,000–$15,000 USD por integración.</li>
+        </ul>
+        <div class="opp-kpis">
+          <div class="opp-kpi"><span class="opp-kpi-val">$25K+</span><span class="opp-kpi-label">Revenue mensual estimado</span></div>
+          <div class="opp-kpi"><span class="opp-kpi-val">3x</span><span class="opp-kpi-label">Multiplicador vs. AdSense solo</span></div>
+          <div class="opp-kpi"><span class="opp-kpi-val">5</span><span class="opp-kpi-label">Fuentes de ingreso activas</span></div>
+        </div>
+        <div class="opp-tools">🛠 Herramientas: <span class="opp-tool-tag">YouTube Studio</span><span class="opp-tool-tag">YouTube BrandConnect</span><span class="opp-tool-tag">Printful</span><span class="opp-tool-tag">Spreadshop</span></div>
+        <div class="opp-meta">
+          <span class="opp-impact muy-alto">Impacto: Muy Alto</span>
+          <span class="opp-priority p2">🔶 Prioridad #4</span>
+          <span class="opp-timeline">⏱ Semanas 2–6</span>
+        </div>
+      </div>
+
+      <!-- ===== OPP 5: TikTok Verificación + Creator Marketplace ===== -->
+      <div class="opp-card accent-teal">
+        <div class="opp-header">
+          <span class="opp-category-tag teal">✓ Credibilidad</span>
+          <span class="opp-icon-wrap">🎵</span>
+        </div>
+        <div class="opp-title">TikTok: Verificación + Creator Marketplace + LIVE Gifts</div>
+        <div class="opp-context">
+          Con <strong style="color:#fff">3.1M de seguidores y 42.7M de corazones</strong>, OVI está muy por encima del umbral de verificación de TikTok. La falta del check azul reduce la credibilidad frente a nuevos seguidores y limita el acceso al TikTok Creator Marketplace, donde las marcas pagan entre $2,000–$20,000 USD por integración a artistas de su tamaño.
+        </div>
+        <div class="opp-steps-title">📋 Plan de Acción en TikTok</div>
+        <ul class="opp-steps">
+          <li><span class="opp-step-num">1</span><strong style="color:#fff">Solicitar verificación:</strong> Ir a Perfil → Configuración → Cuenta → Solicitar verificación. Incluir links a perfiles verificados de Instagram y Wikipedia. El proceso toma 30 días. Si se rechaza, esperar 30 días y volver a aplicar con más evidencia de presencia en medios.</li>
+          <li><span class="opp-step-num">2</span><strong style="color:#fff">Registrarse en TikTok Creator Marketplace:</strong> En creator.tiktok.com, crear perfil de marca con kit de medios, estadísticas de audiencia y nichos de contenido. Las marcas de moda, bebidas y gaming pagan más a artistas latinos de ese rango.</li>
+          <li><span class="opp-step-num">3</span><strong style="color:#fff">Activar TikTok LIVE estratégico:</strong> Programar 2 lives por semana (martes y jueves, 8–10pm ET que es el horario pico del mercado hispano de EE.UU.). Los LIVE Gifts generan ingreso directo en Diamond coins que se convierten a dólares.</li>
+          <li><span class="opp-step-num">4</span><strong style="color:#fff">TikTok Series (contenido premium):</strong> Crear una serie de videos de pago dentro de TikTok ($1.99–$4.99 USD) con contenido exclusivo: sesiones de estudio, tutoriales de producción, historias detrás de las canciones.</li>
+          <li><span class="opp-step-num">5</span>Usar TikTok Analytics para identificar los días y horas de mayor engagement de @ovi_oficial y ajustar el calendario de publicación para maximizar el alcance orgánico del FYP.</li>
+        </ul>
+        <div class="opp-kpis">
+          <div class="opp-kpi"><span class="opp-kpi-val">$8K+</span><span class="opp-kpi-label">Revenue mensual TikTok</span></div>
+          <div class="opp-kpi"><span class="opp-kpi-val">+40%</span><span class="opp-kpi-label">Boost en CTR post-verificación</span></div>
+          <div class="opp-kpi"><span class="opp-kpi-val">3.1M</span><span class="opp-kpi-label">Seguidores elegibles</span></div>
+        </div>
+        <div class="opp-tools">🛠 Herramientas: <span class="opp-tool-tag">TikTok Creator Marketplace</span><span class="opp-tool-tag">TikTok Studio</span><span class="opp-tool-tag">TikTok Analytics</span></div>
+        <div class="opp-meta">
+          <span class="opp-impact alto">Impacto: Alto</span>
+          <span class="opp-priority p2">🔶 Prioridad #5</span>
+          <span class="opp-timeline">⏱ Semanas 1–4</span>
+        </div>
+      </div>
+
+      <!-- ===== OPP 6: YouTube Verificación ===== -->
+      <div class="opp-card accent-red">
+        <div class="opp-header">
+          <span class="opp-category-tag red">✓ Credibilidad</span>
+          <span class="opp-icon-wrap">▶</span>
+        </div>
+        <div class="opp-title">Verificación de Canal YouTube + Custom URL + Playlists SEO</div>
+        <div class="opp-context">
+          Con <strong style="color:#fff">723K suscriptores</strong>, OVI supera el umbral de 100K requerido para la verificación de canal en YouTube. Sin la insignia de verificación, los usuarios que buscan el canal pueden confundirlo con cuentas fan o impersonators, perdiendo suscriptores legítimos. Además, la URL personalizada no está optimizada para SEO.
+        </div>
+        <div class="opp-steps-title">📋 Pasos de Verificación y Optimización</div>
+        <ul class="opp-steps">
+          <li><span class="opp-step-num">1</span><strong style="color:#fff">Verificar el canal:</strong> Ir a studio.youtube.com → Configuración → Canal → Elegibilidad del canal → Solicitar verificación. Requiere +100K suscriptores (cumplido) y número de teléfono válido para SMS.</li>
+          <li><span class="opp-step-num">2</span><strong style="color:#fff">Configurar Custom URL:</strong> Cambiar la URL del canal a youtube.com/@ovi_oficial (verificar si está disponible) para unificar el handle con TikTok e Instagram. Esto mejora el SEO en búsquedas de Google.</li>
+          <li><span class="opp-step-num">3</span><strong style="color:#fff">Crear playlists temáticas SEO:</strong> Organizar los 43 videos en playlists: "OVI Éxitos", "OVI Colaboraciones", "OVI Acústico / Behind The Scenes", "OVI Letras Oficiales". Las playlists aparecen en Google Search y aumentan el watch time.</li>
+          <li><span class="opp-step-num">4</span><strong style="color:#fff">Optimizar descripciones con keywords:</strong> Revisar los 8 videos con más vistas y añadir en la descripción: nombre del artista, nombre de la canción, género, año, y links a Spotify/Apple Music. Esto mejora el posicionamiento en YouTube Search.</li>
+          <li><span class="opp-step-num">5</span>Añadir end screens y cards en cada video para hacer cross-promotion entre videos relacionados. Esto puede aumentar el watch time del canal un 25–35%.</li>
+        </ul>
+        <div class="opp-kpis">
+          <div class="opp-kpi"><span class="opp-kpi-val">+35%</span><span class="opp-kpi-label">CTR en búsquedas</span></div>
+          <div class="opp-kpi"><span class="opp-kpi-val">+25%</span><span class="opp-kpi-label">Watch time por playlist</span></div>
+          <div class="opp-kpi"><span class="opp-kpi-val">1 día</span><span class="opp-kpi-label">Tiempo de implementación</span></div>
+        </div>
+        <div class="opp-tools">🛠 Herramientas: <span class="opp-tool-tag">YouTube Studio</span><span class="opp-tool-tag">TubeBuddy</span><span class="opp-tool-tag">VidIQ</span></div>
+        <div class="opp-meta">
+          <span class="opp-impact alto">Impacto: Alto</span>
+          <span class="opp-priority p2">🔶 Prioridad #6</span>
+          <span class="opp-timeline">⏱ Semana 1 (1–2 días)</span>
+        </div>
+      </div>
+
+      <!-- ===== OPP 7: Instagram Lives + Cross-Platform ===== -->
+      <div class="opp-card accent-purple">
+        <div class="opp-header">
+          <span class="opp-category-tag purple">📡 Engagement</span>
+          <span class="opp-icon-wrap">🔴</span>
+        </div>
+        <div class="opp-title">Lives Coordinados Multi-Plataforma: Instagram + TikTok + Facebook</div>
+        <div class="opp-context">
+          OVI tiene <strong style="color:#fff">3.3M de seguidores en Instagram verificados</strong>, pero no se detecta una estrategia consistente de transmisiones en vivo. Los Lives son el formato con mayor tasa de notificación push (el 80% de los seguidores recibe una notificación al inicio de un Live) y generan el contenido con mayor engagement orgánico en todas las plataformas simultáneamente.
+        </div>
+        <div class="opp-steps-title">📋 Estrategia de Lives Semanal</div>
+        <ul class="opp-steps">
+          <li><span class="opp-step-num">1</span><strong style="color:#fff">Programa fijo de Lives:</strong> Establecer un calendario fijo — por ejemplo, cada viernes 9pm ET. La consistencia de horario acondiciona a la audiencia a esperar y conectarse. Anunciar el Live 48h antes con un Reel/Story de cuenta regresiva.</li>
+          <li><span class="opp-step-num">2</span><strong style="color:#fff">Live simultáneo en Instagram + TikTok:</strong> Usar software como StreamYard o Restream para transmitir al mismo tiempo en Instagram Live y TikTok LIVE, duplicando el alcance sin duplicar el esfuerzo.</li>
+          <li><span class="opp-step-num">3</span><strong style="color:#fff">Formatos de Lives rotatorios:</strong> (a) Sesión de estudio en vivo — mostrar el proceso de producción de una canción. (b) Q&amp;A de fans — responder preguntas en tiempo real. (c) Listening party — escuchar el nuevo sencillo en simultáneo con los fans antes del lanzamiento oficial.</li>
+          <li><span class="opp-step-num">4</span><strong style="color:#fff">Monetización de Lives:</strong> En TikTok LIVE activar "Gifts" para que fans envíen regalos virtuales. En Instagram Live activar "Insignias" (Badges) donde fans pagan $0.99, $1.99 o $4.99 por una insignia de corazón visible durante el live.</li>
+          <li><span class="opp-step-num">5</span>Guardar cada Live como Reel en Instagram y como video en TikTok para que el contenido siga generando vistas y alcance orgánico los días posteriores al live.</li>
+        </ul>
+        <div class="opp-kpis">
+          <div class="opp-kpi"><span class="opp-kpi-val">80%</span><span class="opp-kpi-label">Tasa notificación push</span></div>
+          <div class="opp-kpi"><span class="opp-kpi-val">$3K+</span><span class="opp-kpi-label">Revenue mensual en lives</span></div>
+          <div class="opp-kpi"><span class="opp-kpi-val">4x</span><span class="opp-kpi-label">Más engagement que posts</span></div>
+        </div>
+        <div class="opp-tools">🛠 Herramientas: <span class="opp-tool-tag">StreamYard</span><span class="opp-tool-tag">Restream</span><span class="opp-tool-tag">OBS Studio</span><span class="opp-tool-tag">Instagram Badges</span></div>
+        <div class="opp-meta">
+          <span class="opp-impact alto">Impacto: Alto</span>
+          <span class="opp-priority p2">🔶 Prioridad #7</span>
+          <span class="opp-timeline">⏱ Semanal / Indefinido</span>
+        </div>
+      </div>
+
+      <!-- ===== OPP 8: Email List / Fan Club ===== -->
+      <div class="opp-card accent-green">
+        <div class="opp-header">
+          <span class="opp-category-tag green">🏆 Activos Propios</span>
+          <span class="opp-icon-wrap">📧</span>
+        </div>
+        <div class="opp-title">Lista de Email + Fan Club — Propiedad Total de tu Audiencia</div>
+        <div class="opp-context">
+          OVI tiene <strong style="color:#fff">7.5M+ de seguidores en redes sociales</strong>, pero si Instagram o TikTok cerraran mañana, <strong style="color:#fbbf24">perdería toda esa audiencia de un día para otro</strong>. Una lista de email es el único canal de comunicación directa que nadie puede quitar. Los artistas con email lists de 50K–200K fans generan ingresos pre-venta de boletos y merchandise que las redes nunca pueden garantizar.
+        </div>
+        <div class="opp-steps-title">📋 Construcción del Fan Club Propio</div>
+        <ul class="opp-steps">
+          <li><span class="opp-step-num">1</span><strong style="color:#fff">Crear landing page de Fan Club:</strong> Una página simple (puede ser en Beehiiv o ConvertKit) donde los fans se registren con su email a cambio de un beneficio exclusivo: acceso anticipado a letras, descuento del 10% en merch, o una canción inédita descargable.</li>
+          <li><span class="opp-step-num">2</span><strong style="color:#fff">Link en bio multi-plataforma:</strong> Cambiar el link en bio de Instagram, TikTok y Facebook a un Linktree o Beacons con el Fan Club como primera opción. Añadir una Story fijada en Instagram promoviendo el registro al Fan Club.</li>
+          <li><span class="opp-step-num">3</span><strong style="color:#fff">Secuencia de bienvenida automatizada:</strong> Crear 5 emails automáticos que se envían en los primeros 10 días después del registro: (1) Bienvenida + regalo exclusivo, (2) Historia personal de OVI, (3) Top 5 canciones favoritas con letra, (4) Invitación al grupo privado de Facebook, (5) Pre-acceso al próximo lanzamiento.</li>
+          <li><span class="opp-step-num">4</span><strong style="color:#fff">Newsletter mensual "OVI Insider":</strong> Email mensual con noticias exclusivas antes que nadie: fechas de gira, lanzamientos, fotos de backstage. La tasa de apertura en artistas musicales es del 35–50%, mucho mayor que el alcance orgánico de redes.</li>
+          <li><span class="opp-step-num">5</span>Meta a 12 meses: 100,000 emails de fans reales. Con esa lista, la preventa de boletos de cualquier tour puede agotarse en horas sin depender de plataformas de terceros.</li>
+        </ul>
+        <div class="opp-kpis">
+          <div class="opp-kpi"><span class="opp-kpi-val">100K</span><span class="opp-kpi-label">Emails objetivo a 12 meses</span></div>
+          <div class="opp-kpi"><span class="opp-kpi-val">45%</span><span class="opp-kpi-label">Tasa apertura estimada</span></div>
+          <div class="opp-kpi"><span class="opp-kpi-val">$0</span><span class="opp-kpi-label">Costo hasta 1K suscriptores</span></div>
+        </div>
+        <div class="opp-tools">🛠 Herramientas: <span class="opp-tool-tag">Beehiiv</span><span class="opp-tool-tag">ConvertKit</span><span class="opp-tool-tag">Beacons.ai</span><span class="opp-tool-tag">Linktree Pro</span></div>
+        <div class="opp-meta">
+          <span class="opp-impact medio-alto">Impacto: Medio-Alto</span>
+          <span class="opp-priority p3">🟣 Prioridad #8</span>
+          <span class="opp-timeline">⏱ Meses 1–12</span>
+        </div>
+      </div>
+
+      <!-- ===== OPP 9: Facebook Comunidad ===== -->
+      <div class="opp-card accent-blue">
+        <div class="opp-header">
+          <span class="opp-category-tag blue">📊 Comunidad</span>
+          <span class="opp-icon-wrap">👥</span>
+        </div>
+        <div class="opp-title">Facebook — Reactivar Comunidad + Grupo Privado de Fans</div>
+        <div class="opp-context">
+          <strong style="color:#fff">414K seguidores en Facebook</strong> con engagement potencialmente dormido. Facebook sigue siendo la plataforma dominante para el segmento <strong style="color:#fff">25–45 años en Latinoamérica</strong> y la diáspora hispana en EE.UU. Un Grupo de Facebook privado (Fan Club oficial) puede reactivar una comunidad muy leal que las otras plataformas no capturan.
+        </div>
+        <div class="opp-steps-title">📋 Plan de Reactivación en 90 Días</div>
+        <ul class="opp-steps">
+          <li><span class="opp-step-num">1</span><strong style="color:#fff">Semana 1–2:</strong> Crear el Grupo de Facebook "OVI Fan Club Oficial" — privado, moderado, con reglas claras. Promoverlo desde la página con un post fijado e invitación a todos los seguidores existentes. Meta: 10,000 miembros en 30 días.</li>
+          <li><span class="opp-step-num">2</span><strong style="color:#fff">Semana 3–4:</strong> Lanzar una serie de contenido exclusivo del grupo: "Lunes de Lyrics" (letra inédita o demo), "Miércoles de Backstage" (foto/video de estudio), "Viernes de Fan" (el fan de la semana seleccionado por OVI).</li>
+          <li><span class="opp-step-num">3</span><strong style="color:#fff">Mes 2:</strong> Activar Facebook Live exclusivo para miembros del grupo — Q&amp;A privado de 30 minutos mensual. Esto crea un incentivo premium para unirse al grupo y mantenerse activo.</li>
+          <li><span class="opp-step-num">4</span>Conectar la página de Facebook con Instagram usando Meta Business Suite para publicar automáticamente el contenido de Instagram en Facebook, manteniendo ambas plataformas activas sin esfuerzo doble.</li>
+          <li><span class="opp-step-num">5</span><strong style="color:#fff">Mes 3:</strong> Activar la función "Suscripciones" de Facebook (Facebook Stars / Subscriptions) para crear un nivel de fan premium dentro de la misma plataforma con beneficios exclusivos.</li>
+        </ul>
+        <div class="opp-kpis">
+          <div class="opp-kpi"><span class="opp-kpi-val">60K</span><span class="opp-kpi-label">Engagement objetivo en 90d</span></div>
+          <div class="opp-kpi"><span class="opp-kpi-val">10K</span><span class="opp-kpi-label">Miembros grupo en 30 días</span></div>
+          <div class="opp-kpi"><span class="opp-kpi-val">3x</span><span class="opp-kpi-label">Alcance orgánico vs. página</span></div>
+        </div>
+        <div class="opp-tools">🛠 Herramientas: <span class="opp-tool-tag">Meta Business Suite</span><span class="opp-tool-tag">Facebook Groups</span><span class="opp-tool-tag">Facebook Stars</span><span class="opp-tool-tag">Creator Studio</span></div>
+        <div class="opp-meta">
+          <span class="opp-impact medio-alto">Impacto: Medio-Alto</span>
+          <span class="opp-priority p3">🟣 Prioridad #9</span>
+          <span class="opp-timeline">⏱ Meses 1–3</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================== ROADMAP 12 MESES ======================== -->
+  <section class="fade-in fade-in-5 roadmap-section">
+    <div class="section-label">Plan de Ejecución</div>
+    <div class="section-title">Roadmap de <span class="accent">12 Meses</span></div>
+    <div class="roadmap-grid">
+
+      <div class="roadmap-phase">
+        <div class="roadmap-phase-label">Fase 1 · Meses 1–3</div>
+        <div class="roadmap-phase-title">⚡ Activación Rápida</div>
+        <div class="roadmap-item"><span class="roadmap-dot dot-red"></span>Solicitar verificación en YouTube y TikTok</div>
+        <div class="roadmap-item"><span class="roadmap-dot dot-red"></span>Publicar primeros 30 YouTube Shorts (TikToks reciclados)</div>
+        <div class="roadmap-item"><span class="roadmap-dot dot-red"></span>Lanzar Fan Club en Beehiiv / ConvertKit</div>
+        <div class="roadmap-item"><span class="roadmap-dot dot-red"></span>Crear Grupo de Facebook Fan Club Oficial</div>
+        <div class="roadmap-item"><span class="roadmap-dot dot-red"></span>Activar Canal de Membresías en YouTube</div>
+        <div class="roadmap-item"><span class="roadmap-dot dot-red"></span>Configurar primera campaña de Meta Ads ($700 USD test)</div>
+        <div class="roadmap-phase-kpi">
+          <div class="roadmap-phase-kpi-val">+400K</div>
+          <div class="roadmap-phase-kpi-label">Seguidores nuevos proyectados</div>
+        </div>
+      </div>
+
+      <div class="roadmap-phase">
+        <div class="roadmap-phase-label">Fase 2 · Meses 4–6</div>
+        <div class="roadmap-phase-title">📈 Escala y Revenue</div>
+        <div class="roadmap-item"><span class="roadmap-dot dot-amber"></span>1ª Colaboración estratégica (mercado México)</div>
+        <div class="roadmap-item"><span class="roadmap-dot dot-amber"></span>Activar TikTok Creator Marketplace</div>
+        <div class="roadmap-item"><span class="roadmap-dot dot-amber"></span>Lanzar YouTube Shopping (merchandise)</div>
+        <div class="roadmap-item"><span class="roadmap-dot dot-amber"></span>Calendario fijo de Lives semanales (viernes)</div>
+        <div class="roadmap-item"><span class="roadmap-dot dot-amber"></span>Registrarse en YouTube BrandConnect</div>
+        <div class="roadmap-item"><span class="roadmap-dot dot-amber"></span>Meta Ads: escalar a $2,000 USD/lanzamiento</div>
+        <div class="roadmap-phase-kpi">
+          <div class="roadmap-phase-kpi-val">$20K+</div>
+          <div class="roadmap-phase-kpi-label">Revenue mensual estimado</div>
+        </div>
+      </div>
+
+      <div class="roadmap-phase">
+        <div class="roadmap-phase-label">Fase 3 · Meses 7–12</div>
+        <div class="roadmap-phase-title">🚀 Dominio del Mercado</div>
+        <div class="roadmap-item"><span class="roadmap-dot dot-green"></span>2ª y 3ª Colaboración (Colombia + EE.UU. bilingüe)</div>
+        <div class="roadmap-item"><span class="roadmap-dot dot-green"></span>10M de suscriptores en YouTube objetivo</div>
+        <div class="roadmap-item"><span class="roadmap-dot dot-green"></span>100K emails en Fan Club activo</div>
+        <div class="roadmap-item"><span class="roadmap-dot dot-green"></span>Tour anunciado con presale exclusiva via email</div>
+        <div class="roadmap-item"><span class="roadmap-dot dot-green"></span>Álbum completo con rollout multi-plataforma coordinado</div>
+        <div class="roadmap-item"><span class="roadmap-dot dot-green"></span>Expansión a Spotify Canvas + Spotify Marquee Ads</div>
+        <div class="roadmap-phase-kpi">
+          <div class="roadmap-phase-kpi-val">10M</div>
+          <div class="roadmap-phase-kpi-label">Seguidores totales proyectados</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================== FOOTER ======================== -->
+  <footer class="footer">
+    <div class="footer-logo">OVI Analytics</div>
+    <p class="footer-text">
+      <strong>Impulsado por Apify + Claude AI</strong> &nbsp;·&nbsp; Datos recopilados el 18 de marzo de 2026
+    </p>
+    <p class="footer-text" style="margin-top:8px;font-size:11px;">
+      Plataformas: Instagram · TikTok · YouTube · Facebook &nbsp;·&nbsp; Reporte generado para @ovi_oficial
+    </p>
+  </footer>
+
+</div>
+
+<!-- ======================== CHART.JS ======================== -->
+<script>
+  Chart.defaults.color = '#64748b';
+  Chart.defaults.borderColor = 'rgba(255,255,255,0.05)';
+  Chart.defaults.font.family = "'Inter', sans-serif";
+
+  const GRID = { color: 'rgba(255,255,255,0.05)', drawBorder: false };
+  const TICK = { color: '#64748b', font: { size: 11, weight: '500' } };
+
+  /* ---- YouTube Top Videos ---- */
+  const YT_URLS = [
+    'https://www.youtube.com/watch?v=fnYHdE7caAg',
+    'https://www.youtube.com/watch?v=GEBHaXXhWLY',
+    'https://www.youtube.com/watch?v=9JK5ZpSJ-ZU',
+    'https://www.youtube.com/watch?v=uzerskEb8jw',
+    'https://www.youtube.com/watch?v=P9QFO5--b_I',
+    'https://www.youtube.com/watch?v=T-k1i5_yS50',
+    'https://www.youtube.com/watch?v=UqHU7ENb4FQ',
+    'https://www.youtube.com/watch?v=ntPf7r2vebU'
+  ];
+  new Chart(document.getElementById('ytChart'), {
+    type: 'bar',
+    data: {
+      labels: [
+        'Los Rockstar\nNo Van al Cielo',
+        'A Los 16',
+        'HALLANDALE\n(Hades 66)',
+        'Mientras\nNo Vuelves',
+        'Historia Real',
+        'Al Otro Nivel',
+        'Nada es\nComo Antes',
+        'Así Moriré'
+      ],
+      datasets: [{
+        label: 'Vistas',
+        data: [31382521, 24112976, 16395668, 10352046, 6743576, 5465853, 4259431, 4211970],
+        backgroundColor: [
+          'rgba(255,0,0,0.75)',
+          'rgba(255,0,0,0.65)',
+          'rgba(255,0,0,0.55)',
+          'rgba(255,0,0,0.45)',
+          'rgba(255,0,0,0.38)',
+          'rgba(255,0,0,0.32)',
+          'rgba(255,0,0,0.26)',
+          'rgba(255,0,0,0.22)'
+        ],
+        borderColor: 'rgba(255,0,0,0.9)',
+        borderWidth: 1,
+        borderRadius: 6,
+        borderSkipped: false
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      onClick: (evt, elements) => {
+        if (elements.length > 0) {
+          const idx = elements[0].index;
+          if (YT_URLS[idx]) window.open(YT_URLS[idx], '_blank', 'noopener');
+        }
+      },
+      onHover: (evt, elements) => {
+        evt.native.target.style.cursor = elements.length ? 'pointer' : 'default';
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#1a1a2e',
+          borderColor: 'rgba(255,255,255,0.1)',
+          borderWidth: 1,
+          titleColor: '#e2e8f0',
+          bodyColor: '#94a3b8',
+          padding: 12,
+          callbacks: {
+            label: ctx => ' ' + (ctx.raw / 1000000).toFixed(1) + 'M vistas'
+          }
+        }
+      },
+      scales: {
+        x: { grid: GRID, ticks: { ...TICK, maxRotation: 30 } },
+        y: {
+          grid: GRID,
+          ticks: {
+            ...TICK,
+            callback: v => (v / 1000000).toFixed(0) + 'M'
+          }
+        }
+      }
+    }
+  });
+
+  /* ---- Doughnut ---- */
+  new Chart(document.getElementById('doughnutChart'), {
+    type: 'doughnut',
+    data: {
+      labels: ['Instagram', 'TikTok', 'YouTube', 'Facebook'],
+      datasets: [{
+        data: [3297018, 3100000, 723000, 414581],
+        backgroundColor: [
+          'rgba(225,48,108,0.85)',
+          'rgba(105,201,208,0.85)',
+          'rgba(255,0,0,0.85)',
+          'rgba(24,119,242,0.85)'
+        ],
+        borderColor: '#0a0a0f',
+        borderWidth: 3,
+        hoverBorderWidth: 4,
+        hoverOffset: 8
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      cutout: '68%',
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#1a1a2e',
+          borderColor: 'rgba(255,255,255,0.1)',
+          borderWidth: 1,
+          titleColor: '#e2e8f0',
+          bodyColor: '#94a3b8',
+          padding: 12,
+          callbacks: {
+            label: ctx => ' ' + (ctx.raw / 1000000).toFixed(2) + 'M seguidores'
+          }
+        }
+      }
+    }
+  });
+
+  /* ---- TikTok Top Videos ---- */
+  const TT_URLS = [
+    'https://www.tiktok.com/@ovi_oficial/video/7605307544441081102',
+    'https://www.tiktok.com/@ovi_oficial/video/7611932929794624781',
+    'https://www.tiktok.com/@ovi_oficial/video/7517449508645604622',
+    'https://www.tiktok.com/@ovi_oficial/video/7516693211503447310',
+    'https://www.tiktok.com/@ovi_oficial/video/7519709700342959374',
+    'https://www.tiktok.com/@ovi_oficial/video/7522895022845431095'
+  ];
+  new Chart(document.getElementById('ttChart'), {
+    type: 'bar',
+    data: {
+      labels: [
+        'Pinche alíen',
+        'Sé que tuvimos\ndiferencias',
+        'Buscando ropa\npal video',
+        'Por Miami en\ncarro de Luar',
+        'Pasta time',
+        'Los Rockstar\nremix'
+      ],
+      datasets: [{
+        label: 'Reproducciones',
+        data: [18000000, 7500000, 4300000, 4200000, 4000000, 3400000],
+        backgroundColor: [
+          'rgba(105,201,208,0.8)',
+          'rgba(105,201,208,0.68)',
+          'rgba(105,201,208,0.56)',
+          'rgba(105,201,208,0.46)',
+          'rgba(105,201,208,0.38)',
+          'rgba(105,201,208,0.30)'
+        ],
+        borderColor: 'rgba(105,201,208,0.9)',
+        borderWidth: 1,
+        borderRadius: 6,
+        borderSkipped: false
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      onClick: (evt, elements) => {
+        if (elements.length > 0) {
+          const idx = elements[0].index;
+          if (TT_URLS[idx]) window.open(TT_URLS[idx], '_blank', 'noopener');
+        }
+      },
+      onHover: (evt, elements) => {
+        evt.native.target.style.cursor = elements.length ? 'pointer' : 'default';
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#1a1a2e',
+          borderColor: 'rgba(255,255,255,0.1)',
+          borderWidth: 1,
+          titleColor: '#e2e8f0',
+          bodyColor: '#94a3b8',
+          padding: 12,
+          callbacks: {
+            label: ctx => ' ' + (ctx.raw / 1000000).toFixed(1) + 'M reproducciones'
+          }
+        }
+      },
+      scales: {
+        x: { grid: GRID, ticks: { ...TICK, maxRotation: 30 } },
+        y: {
+          grid: GRID,
+          ticks: {
+            ...TICK,
+            callback: v => (v / 1000000).toFixed(0) + 'M'
+          }
+        }
+      }
+    }
+  });
+
+  /* ---- Instagram Reels ---- */
+  const IG_URLS = [
+    'https://www.instagram.com/p/C2QOaxKORsq/',
+    'https://www.instagram.com/p/C8LDGoiv2Fz/',
+    'https://www.instagram.com/p/C1DZcCUvTZn/',
+    'https://www.instagram.com/p/C9LYjWGOJ50/',
+    'https://www.instagram.com/p/DLxyCjXy8WI/',
+    'https://www.instagram.com/p/C0U7413O1HQ/'
+  ];
+  new Chart(document.getElementById('igChart'), {
+    type: 'bar',
+    data: {
+      labels: [
+        'Al Otro Nivel',
+        'Yo Quiero\nun Malo',
+        'Nada es\nComo Antes',
+        'Háblame\nde Dinero',
+        'Rockstar\n(Jul 6)',
+        'Así Moriré'
+      ],
+      datasets: [{
+        label: 'Reproducciones',
+        data: [15668700, 11568073, 6635454, 6465266, 5963942, 5537507],
+        backgroundColor: [
+          'rgba(225,48,108,0.85)',
+          'rgba(225,48,108,0.72)',
+          'rgba(225,48,108,0.59)',
+          'rgba(225,48,108,0.47)',
+          'rgba(225,48,108,0.37)',
+          'rgba(225,48,108,0.30)'
+        ],
+        borderColor: 'rgba(225,48,108,0.9)',
+        borderWidth: 1,
+        borderRadius: 6,
+        borderSkipped: false
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      onClick: (evt, elements) => {
+        if (elements.length > 0) {
+          const idx = elements[0].index;
+          if (IG_URLS[idx]) window.open(IG_URLS[idx], '_blank', 'noopener');
+        }
+      },
+      onHover: (evt, elements) => {
+        evt.native.target.style.cursor = elements.length ? 'pointer' : 'default';
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#1a1a2e',
+          borderColor: 'rgba(255,255,255,0.1)',
+          borderWidth: 1,
+          titleColor: '#e2e8f0',
+          bodyColor: '#94a3b8',
+          padding: 12,
+          callbacks: {
+            label: ctx => ' ' + (ctx.raw / 1000000).toFixed(2) + 'M reproducciones'
+          }
+        }
+      },
+      scales: {
+        x: { grid: GRID, ticks: { ...TICK, maxRotation: 30 } },
+        y: {
+          grid: GRID,
+          ticks: {
+            ...TICK,
+            callback: v => (v / 1000000).toFixed(0) + 'M'
+          }
+        }
+      }
+    }
+  });
+
+  /* ======================== ANIMATED COUNTERS ======================== */
+  function animateCounter(el) {
+    const target = parseFloat(el.dataset.target);
+    const divisor = parseFloat(el.dataset.divisor) || 1;
+    const suffix = el.dataset.suffix || '';
+    const decimals = parseInt(el.dataset.decimals) || 0;
+    const duration = 1500;
+    const start = performance.now();
+
+    function update(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      // Ease out cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = (target * eased) / divisor;
+      el.textContent = current.toFixed(decimals) + suffix;
+      if (progress < 1) requestAnimationFrame(update);
+    }
+
+    requestAnimationFrame(update);
+  }
+
+  // Observe counters and trigger on first intersection
+  const counterEls = document.querySelectorAll('.counter');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        animateCounter(e.target);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  counterEls.forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>
