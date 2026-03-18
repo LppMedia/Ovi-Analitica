@@ -743,6 +743,33 @@
     /* ======================== COUNTER ======================== */
     .counter { display: inline-block; }
 
+    /* ======================== CLICKABLE LINKS ======================== */
+    table a, .platform-card a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    table a:hover {
+      color: #a78bfa;
+      text-decoration: underline;
+    }
+    .platform-card a {
+      display: block;
+    }
+    table a::after {
+      content: ' ↗';
+      font-size: 0.85em;
+      opacity: 0.6;
+    }
+
+    /* ======================== CHART HINT ======================== */
+    .chart-hint {
+      font-size: 11px;
+      color: var(--dim);
+      margin-top: 10px;
+      text-align: center;
+    }
+
     /* Scrollbar */
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: var(--bg); }
@@ -828,7 +855,7 @@
         <div class="platform-header">
           <div class="platform-icon ig">📷</div>
           <div>
-            <div class="platform-name">Instagram</div>
+            <div class="platform-name"><a href="https://www.instagram.com/ovi_oficial/" target="_blank" rel="noopener">Instagram</a></div>
             <span class="platform-verified">✓ Verificado</span>
           </div>
         </div>
@@ -849,7 +876,7 @@
         <div class="platform-header">
           <div class="platform-icon tt">🎵</div>
           <div>
-            <div class="platform-name">TikTok</div>
+            <div class="platform-name"><a href="https://www.tiktok.com/@ovi_oficial" target="_blank" rel="noopener">TikTok</a></div>
           </div>
         </div>
         <div class="platform-stat">
@@ -869,7 +896,7 @@
         <div class="platform-header">
           <div class="platform-icon yt">▶</div>
           <div>
-            <div class="platform-name">YouTube</div>
+            <div class="platform-name"><a href="https://www.youtube.com/@ovi.oficial" target="_blank" rel="noopener">YouTube</a></div>
           </div>
         </div>
         <div class="platform-stat">
@@ -889,7 +916,7 @@
         <div class="platform-header">
           <div class="platform-icon fb">f</div>
           <div>
-            <div class="platform-name">Facebook</div>
+            <div class="platform-name"><a href="https://www.facebook.com/ovioficial" target="_blank" rel="noopener">Facebook</a></div>
           </div>
         </div>
         <div class="platform-stat">
@@ -920,6 +947,7 @@
         <div class="chart-wrap tall">
           <canvas id="ytChart"></canvas>
         </div>
+        <p class="chart-hint">Haz clic en las barras para abrir el post ↗</p>
       </div>
 
       <!-- Follower Doughnut -->
@@ -954,6 +982,7 @@
         <div class="chart-wrap">
           <canvas id="ttChart"></canvas>
         </div>
+        <p class="chart-hint">Haz clic en las barras para abrir el post ↗</p>
       </div>
 
       <!-- Instagram Reels Bar -->
@@ -963,6 +992,7 @@
         <div class="chart-wrap">
           <canvas id="igChart"></canvas>
         </div>
+        <p class="chart-hint">Haz clic en las barras para abrir el post ↗</p>
       </div>
 
     </div>
@@ -991,35 +1021,35 @@
           <tbody>
             <tr>
               <td style="color:var(--dim)">01</td>
-              <td>Disney kids 🏰</td>
+              <td><a href="https://www.instagram.com/p/C_vwXMkvuYw/" target="_blank" rel="noopener">Disney kids 🏰</a></td>
               <td><span class="likes-pill">♥ 713,910</span></td>
               <td><span style="color:var(--dim)">—</span></td>
               <td style="color:var(--dim)">Sep 2024</td>
             </tr>
             <tr>
               <td style="color:var(--dim)">02</td>
-              <td>Superación (video)</td>
+              <td><a href="https://www.instagram.com/p/CmKU5ERJvJG/" target="_blank" rel="noopener">Superación (video)</a></td>
               <td><span class="likes-pill">♥ 574,600</span></td>
               <td><span class="views-pill">▶ 7.1M</span></td>
               <td style="color:var(--dim)">Dic 2022</td>
             </tr>
             <tr>
               <td style="color:var(--dim)">03</td>
-              <td>Rockstar teaser</td>
+              <td><a href="https://www.instagram.com/p/DLTDcL4AW_y/" target="_blank" rel="noopener">Rockstar teaser</a></td>
               <td><span class="likes-pill">♥ 548,088</span></td>
               <td><span style="color:var(--dim)">—</span></td>
               <td style="color:var(--dim)">Jun 2025</td>
             </tr>
             <tr>
               <td style="color:var(--dim)">04</td>
-              <td>LA 🌴</td>
+              <td><a href="https://www.instagram.com/p/DGwSLnHSUz0/" target="_blank" rel="noopener">LA 🌴</a></td>
               <td><span class="likes-pill">♥ 472,668</span></td>
               <td><span style="color:var(--dim)">—</span></td>
               <td style="color:var(--dim)">Mar 2025</td>
             </tr>
             <tr>
               <td style="color:var(--dim)">05</td>
-              <td>ft Colombia 🇨🇴🇨🇺</td>
+              <td><a href="https://www.instagram.com/p/C38uN7xOEoE/" target="_blank" rel="noopener">ft Colombia 🇨🇴🇨🇺</a></td>
               <td><span class="likes-pill">♥ 452,963</span></td>
               <td><span style="color:var(--dim)">—</span></td>
               <td style="color:var(--dim)">Feb 2024</td>
@@ -1054,7 +1084,7 @@
           <tbody>
             <tr>
               <td style="color:var(--dim)">01</td>
-              <td>Los Rockstar No Van al Cielo</td>
+              <td><a href="https://www.youtube.com/watch?v=fnYHdE7caAg" target="_blank" rel="noopener">Los Rockstar No Van al Cielo</a></td>
               <td><span class="views-pill">▶ 31.4M</span></td>
               <td>—</td>
               <td>—</td>
@@ -1062,7 +1092,7 @@
             </tr>
             <tr>
               <td style="color:var(--dim)">02</td>
-              <td>A Los 16</td>
+              <td><a href="https://www.youtube.com/watch?v=GEBHaXXhWLY" target="_blank" rel="noopener">A Los 16</a></td>
               <td><span class="views-pill">▶ 24.1M</span></td>
               <td>—</td>
               <td>—</td>
@@ -1070,7 +1100,7 @@
             </tr>
             <tr>
               <td style="color:var(--dim)">03</td>
-              <td>HALLANDALE (Hades 66)</td>
+              <td><a href="https://www.youtube.com/watch?v=9JK5ZpSJ-ZU" target="_blank" rel="noopener">HALLANDALE (Hades 66)</a></td>
               <td><span class="views-pill">▶ 16.4M</span></td>
               <td>—</td>
               <td>—</td>
@@ -1078,7 +1108,7 @@
             </tr>
             <tr>
               <td style="color:var(--dim)">04</td>
-              <td>Mientras No Vuelves</td>
+              <td><a href="https://www.youtube.com/watch?v=uzerskEb8jw" target="_blank" rel="noopener">Mientras No Vuelves</a></td>
               <td><span class="views-pill">▶ 10.4M</span></td>
               <td>—</td>
               <td>—</td>
@@ -1086,7 +1116,7 @@
             </tr>
             <tr>
               <td style="color:var(--dim)">05</td>
-              <td>Historia Real</td>
+              <td><a href="https://www.youtube.com/watch?v=P9QFO5--b_I" target="_blank" rel="noopener">Historia Real</a></td>
               <td><span class="views-pill">▶ 6.7M</span></td>
               <td>—</td>
               <td>—</td>
@@ -1094,7 +1124,7 @@
             </tr>
             <tr>
               <td style="color:var(--dim)">06</td>
-              <td>Al Otro Nivel</td>
+              <td><a href="https://www.youtube.com/watch?v=T-k1i5_yS50" target="_blank" rel="noopener">Al Otro Nivel</a></td>
               <td><span class="views-pill">▶ 5.5M</span></td>
               <td>—</td>
               <td>—</td>
@@ -1102,7 +1132,7 @@
             </tr>
             <tr>
               <td style="color:var(--dim)">07</td>
-              <td>Nada es Como Antes</td>
+              <td><a href="https://www.youtube.com/watch?v=UqHU7ENb4FQ" target="_blank" rel="noopener">Nada es Como Antes</a></td>
               <td><span class="views-pill">▶ 4.3M</span></td>
               <td>—</td>
               <td>—</td>
@@ -1110,7 +1140,7 @@
             </tr>
             <tr>
               <td style="color:var(--dim)">08</td>
-              <td>Así Moriré</td>
+              <td><a href="https://www.youtube.com/watch?v=ntPf7r2vebU" target="_blank" rel="noopener">Así Moriré</a></td>
               <td><span class="views-pill">▶ 4.2M</span></td>
               <td>—</td>
               <td>—</td>
@@ -1290,6 +1320,16 @@
   const TICK = { color: '#64748b', font: { size: 11, weight: '500' } };
 
   /* ---- YouTube Top Videos ---- */
+  const YT_URLS = [
+    'https://www.youtube.com/watch?v=fnYHdE7caAg',
+    'https://www.youtube.com/watch?v=GEBHaXXhWLY',
+    'https://www.youtube.com/watch?v=9JK5ZpSJ-ZU',
+    'https://www.youtube.com/watch?v=uzerskEb8jw',
+    'https://www.youtube.com/watch?v=P9QFO5--b_I',
+    'https://www.youtube.com/watch?v=T-k1i5_yS50',
+    'https://www.youtube.com/watch?v=UqHU7ENb4FQ',
+    'https://www.youtube.com/watch?v=ntPf7r2vebU'
+  ];
   new Chart(document.getElementById('ytChart'), {
     type: 'bar',
     data: {
@@ -1325,6 +1365,15 @@
     options: {
       responsive: true,
       maintainAspectRatio: false,
+      onClick: (evt, elements) => {
+        if (elements.length > 0) {
+          const idx = elements[0].index;
+          if (YT_URLS[idx]) window.open(YT_URLS[idx], '_blank', 'noopener');
+        }
+      },
+      onHover: (evt, elements) => {
+        evt.native.target.style.cursor = elements.length ? 'pointer' : 'default';
+      },
       plugins: {
         legend: { display: false },
         tooltip: {
@@ -1393,6 +1442,14 @@
   });
 
   /* ---- TikTok Top Videos ---- */
+  const TT_URLS = [
+    'https://www.tiktok.com/@ovi_oficial/video/7605307544441081102',
+    'https://www.tiktok.com/@ovi_oficial/video/7611932929794624781',
+    'https://www.tiktok.com/@ovi_oficial/video/7517449508645604622',
+    'https://www.tiktok.com/@ovi_oficial/video/7516693211503447310',
+    'https://www.tiktok.com/@ovi_oficial/video/7519709700342959374',
+    'https://www.tiktok.com/@ovi_oficial/video/7522895022845431095'
+  ];
   new Chart(document.getElementById('ttChart'), {
     type: 'bar',
     data: {
@@ -1424,6 +1481,15 @@
     options: {
       responsive: true,
       maintainAspectRatio: false,
+      onClick: (evt, elements) => {
+        if (elements.length > 0) {
+          const idx = elements[0].index;
+          if (TT_URLS[idx]) window.open(TT_URLS[idx], '_blank', 'noopener');
+        }
+      },
+      onHover: (evt, elements) => {
+        evt.native.target.style.cursor = elements.length ? 'pointer' : 'default';
+      },
       plugins: {
         legend: { display: false },
         tooltip: {
@@ -1452,6 +1518,14 @@
   });
 
   /* ---- Instagram Reels ---- */
+  const IG_URLS = [
+    'https://www.instagram.com/p/C2QOaxKORsq/',
+    'https://www.instagram.com/p/C8LDGoiv2Fz/',
+    'https://www.instagram.com/p/C1DZcCUvTZn/',
+    'https://www.instagram.com/p/C9LYjWGOJ50/',
+    'https://www.instagram.com/p/DLxyCjXy8WI/',
+    'https://www.instagram.com/p/C0U7413O1HQ/'
+  ];
   new Chart(document.getElementById('igChart'), {
     type: 'bar',
     data: {
@@ -1483,6 +1557,15 @@
     options: {
       responsive: true,
       maintainAspectRatio: false,
+      onClick: (evt, elements) => {
+        if (elements.length > 0) {
+          const idx = elements[0].index;
+          if (IG_URLS[idx]) window.open(IG_URLS[idx], '_blank', 'noopener');
+        }
+      },
+      onHover: (evt, elements) => {
+        evt.native.target.style.cursor = elements.length ? 'pointer' : 'default';
+      },
       plugins: {
         legend: { display: false },
         tooltip: {
