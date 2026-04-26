@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Plan de Trabajo — Maryvic León × Vanta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#060310;--violet:#7c3aed;--light-v:#a78bfa;--gold:#d4a017;--text:#e2d9f3;--muted:#8b7fa8;--border:rgba(124,58,237,.18);--card:rgba(13,8,32,.7);--green:#10b981}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden}
+#stars{position:fixed;inset:0;z-index:0;pointer-events:none}
+.star{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;opacity:0;animation:twinkle var(--dur) var(--delay) infinite}
+@keyframes twinkle{0%,100%{opacity:0}50%{opacity:var(--hi)}}
+body::after{content:'';position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")}
+.orb{position:fixed;border-radius:50%;filter:blur(90px);opacity:.12;z-index:0;pointer-events:none;animation:drift 18s ease-in-out infinite alternate}
+.orb1{width:600px;height:600px;background:var(--violet);top:-200px;left:-200px}
+.orb2{width:500px;height:500px;background:#1e1b4b;bottom:-150px;right:-100px;animation-delay:-9s}
+.orb3{width:300px;height:300px;background:var(--gold);top:40%;left:55%;opacity:.06;animation-delay:-4s}
+@keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(40px,30px) scale(1.05)}}
+#pb{position:fixed;top:0;left:0;height:2px;width:0%;background:linear-gradient(90deg,var(--violet),var(--gold));z-index:100;transition:width .1s linear}
+.sidenav{position:fixed;right:20px;top:50%;transform:translateY(-50%);z-index:50;display:flex;flex-direction:column;gap:10px}
+.sidenav a{width:8px;height:8px;border-radius:50%;background:rgba(167,139,250,.25);border:1px solid rgba(167,139,250,.3);display:block;transition:all .3s}
+.sidenav a.active{background:var(--light-v);transform:scale(1.4)}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+.si{position:relative;z-index:2;padding:80px 24px;max-width:1000px;margin:0 auto}
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin-bottom:60px}
+.sec-label{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.sec-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(2rem,5vw,3.2rem);line-height:1;color:#fff;margin-bottom:8px}
+.sec-title em{font-style:italic;color:var(--light-v)}
+.sec-sub{font-size:.9rem;color:var(--muted);max-width:540px;line-height:1.65;margin-bottom:48px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;backdrop-filter:blur(12px);padding:28px 32px}
+
+/* HERO */
+.hero{position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 24px}
+.badge{display:inline-flex;align-items:center;gap:8px;background:rgba(124,58,237,.15);border:1px solid var(--border);border-radius:100px;padding:8px 20px;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--light-v);margin-bottom:32px}
+.badge-dot{width:6px;height:6px;background:var(--light-v);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.5)}}
+.hero-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(3.5rem,9vw,7rem);line-height:.9;letter-spacing:-.02em;margin-bottom:24px;background:linear-gradient(135deg,#fff 0%,var(--light-v) 55%,var(--gold) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-sub{font-size:clamp(.9rem,2vw,1.1rem);color:var(--muted);max-width:480px;line-height:1.7;margin:0 auto 48px}
+.pills{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.pill{padding:9px 20px;border-radius:100px;border:1px solid var(--border);font-size:.78rem;color:var(--muted);background:rgba(124,58,237,.07)}
+.pill span{color:var(--light-v);font-weight:500}
+
+/* INFO CARDS */
+.info-grid{display:grid;grid-template-columns:1fr auto;gap:24px;flex-wrap:wrap}
+.mini-card{border-radius:10px;padding:16px 20px}
+.mini-card.v{background:rgba(124,58,237,.1);border:1px solid var(--border)}
+.mini-card.g{background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2)}
+.mini-card.gold{background:rgba(212,160,23,.08);border:1px solid rgba(212,160,23,.2)}
+.mini-label{font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.mini-val{font-size:.95rem;color:#fff}
+
+/* TIMELINE */
+.timeline{display:flex;flex-direction:column;gap:0}
+.tl-item{display:grid;grid-template-columns:120px 1fr;position:relative}
+.tl-item::before{content:'';position:absolute;left:109px;top:28px;bottom:-20px;width:2px;background:var(--border)}
+.tl-item:last-child::before{display:none}
+.tl-week{padding:22px 0;text-align:right;padding-right:28px}
+.tl-wl{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+.tl-wn{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--light-v);margin-top:3px}
+.tl-dot{position:absolute;left:102px;top:26px;width:16px;height:16px;border-radius:50%;background:var(--violet);border:2px solid var(--bg);z-index:1}
+.tl-dot.gold{background:var(--gold)}
+.tl-dot.green{background:var(--green)}
+.tl-body{padding:18px 0 18px 36px}
+.tl-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 22px}
+.tl-card.hl{border-color:rgba(212,160,23,.4);box-shadow:0 0 28px rgba(212,160,23,.08)}
+.tl-ct{font-size:.95rem;font-weight:500;color:#fff;margin-bottom:10px}
+.tasks{display:flex;flex-direction:column;gap:7px}
+.t{display:flex;gap:10px;font-size:.83rem;color:var(--muted);line-height:1.5}
+.t::before{content:'→';color:var(--violet);flex-shrink:0}
+.t.gold::before{color:var(--gold)}
+.t.green::before{color:var(--green)}
+
+/* VIDEO GRID */
+.vid-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.vc{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.vc-top{height:3px}
+.vc-in{padding:18px 20px}
+.vc-type{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.vc-title{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:#fff;margin-bottom:7px}
+.vc-desc{font-size:.8rem;color:var(--muted);line-height:1.55;margin-bottom:10px}
+.vc-tags{display:flex;flex-wrap:wrap;gap:5px}
+.vt{font-size:.62rem;padding:3px 9px;border-radius:100px;border:1px solid var(--border);color:var(--muted)}
+
+/* CHECKLIST */
+.chk{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.chk-col-title{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px}
+.chk-col-title.v{color:var(--light-v)}
+.chk-col-title.g{color:var(--green)}
+.chk-list{display:flex;flex-direction:column;gap:8px}
+.ci{display:flex;gap:12px;align-items:flex-start;padding:12px 16px;background:var(--card);border:1px solid var(--border);border-radius:9px;font-size:.85rem;color:var(--text)}
+.ci-icon{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;flex-shrink:0;margin-top:1px}
+.ci-icon.v{background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.3);color:var(--light-v)}
+.ci-icon.g{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);color:var(--green)}
+
+/* STEPS */
+.steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px}
+.sc{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:26px 22px;text-align:center}
+.sc-num{font-family:'Space Mono',monospace;font-size:1.8rem;color:var(--violet);opacity:.35;margin-bottom:10px}
+.sc h3{font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:#fff;margin-bottom:7px}
+.sc p{font-size:.8rem;color:var(--muted);line-height:1.6}
+
+/* CTA */
+.cta-box{background:linear-gradient(135deg,rgba(124,58,237,.15),rgba(212,160,23,.07));border:1px solid rgba(124,58,237,.3);border-radius:18px;padding:50px 40px;text-align:center;margin-top:48px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border-radius:100px;font-size:.88rem;font-weight:500;text-decoration:none;transition:all .3s}
+.btn-v{background:linear-gradient(135deg,var(--violet),#5b21b6);color:#fff}
+.btn-v:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(124,58,237,.35)}
+.btn-g{background:linear-gradient(135deg,#065f46,var(--green));color:#fff;margin-left:10px}
+.btn-g:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(16,185,129,.25)}
+footer{position:relative;z-index:2;text-align:center;padding:32px 24px 50px;color:var(--muted);font-size:.78rem;letter-spacing:.06em}
+footer span{color:var(--light-v)}
+@media(max-width:640px){.tl-item{grid-template-columns:90px 1fr}.tl-item::before{left:79px}.tl-dot{left:72px}.tl-week{padding-right:16px}.info-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div id="pb"></div>
+<div id="stars"></div>
+<div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div>
+<nav class="sidenav" id="sn"></nav>
+
+<!-- HERO -->
+<section class="hero" id="inicio" data-label="Inicio">
+  <div class="badge"><span class="badge-dot"></span>Paquete Crecimiento · $2,500</div>
+  <p style="font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold);font-size:1.1rem;letter-spacing:.06em;margin-bottom:10px">Bienvenida al proceso,</p>
+  <h1 class="hero-title">Maryvic<br>León</h1>
+  <p class="hero-sub">Aquí está tu plan de trabajo completo — el roadmap de las próximas 6 semanas desde el branding hasta el lanzamiento de tu primer producto.</p>
+  <div class="pills">
+    <div class="pill"><span>Fase 1</span> · Branding Session</div>
+    <div class="pill"><span>Fase 2</span> · Primeras Grabaciones</div>
+    <div class="pill"><span>Fase 3</span> · Pre-Lanzamiento</div>
+    <div class="pill"><span>Fase 4</span> · Lanzamiento</div>
+  </div>
+</section>
+
+<!-- RESUMEN -->
+<section id="resumen" data-label="Resumen" style="position:relative;z-index:2">
+  <div class="si">
+    <div class="reveal">
+      <div class="card">
+        <div style="display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start;flex-wrap:wrap">
+          <div>
+            <div class="sec-label" style="margin-bottom:8px">Lo que vamos a construir</div>
+            <h2 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:1.9rem;color:#fff;margin-bottom:14px">Tu sistema completo de<br><em style="color:var(--light-v);font-style:italic">marca y monetización</em></h2>
+            <p style="font-size:.88rem;color:var(--muted);line-height:1.7;max-width:480px">Empezamos por definir quién eres visualmente y cómo hablas. Después grabamos el contenido que posiciona, conecta y convierte. En 6 semanas tienes el sistema listo para el primer lanzamiento.</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px;min-width:180px">
+            <div class="mini-card v"><div class="mini-label">Sesión de Branding</div><div class="mini-val">~90 minutos</div></div>
+            <div class="mini-card g"><div class="mini-label">Primera grabación</div><div class="mini-val">Semana 2</div></div>
+            <div class="mini-card gold"><div class="mini-label">Primer lanzamiento</div><div class="mini-val">Semana 5–6</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLAN DE GRABACIONES -->
+<section id="grabaciones" data-label="Plan" style="position:relative;z-index:2">
+  <div class="si">
+    <div class="divider"></div>
+    <div class="reveal">
+      <div class="sec-label">6 semanas · Plan operativo</div>
+      <h2 class="sec-title">Plan de<br><em>Grabaciones</em></h2>
+      <p class="sec-sub">De la sesión de branding al primer lanzamiento — semana a semana.</p>
+    </div>
+
+    <div class="timeline reveal" data-d="80">
+
+      <div class="tl-item">
+        <div class="tl-week"><div class="tl-wl">Semana</div><div class="tl-wn">01</div></div>
+        <div class="tl-dot"></div>
+        <div class="tl-body">
+          <div class="tl-card">
+            <div class="tl-ct">🎨 Branding &amp; Setup</div>
+            <div class="tasks">
+              <div class="t">Sesión de branding — revisión del cuestionario y definición de identidad visual</div>
+              <div class="t">Analítica de TikTok e Instagram — identificar los 5 mejores videos</div>
+              <div class="t">Definir: paleta de colores, tipografía, mood board y voz de marca</div>
+              <div class="t">Confirmar primer producto: nombre, precio y módulos</div>
+              <div class="t">Setup del espacio de grabación — fondo, luz, ángulo</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-week"><div class="tl-wl">Semana</div><div class="tl-wn">02</div></div>
+        <div class="tl-dot gold"></div>
+        <div class="tl-body">
+          <div class="tl-card hl">
+            <div class="tl-ct">🎬 Primeras Grabaciones — Autoridad</div>
+            <div class="tasks">
+              <div class="t gold">VIDEO 1 — Tu historia: antes &amp; después / por qué empezaste</div>
+              <div class="t gold">VIDEO 2 — El problema que resuelves: directo al dolor de tu audiencia</div>
+              <div class="t gold">VIDEO 3 — Tu método: cómo piensas diferente al resto del nicho</div>
+              <div class="t gold">VIDEO 4 — Detrás de cámaras: el día que tomaste la decisión</div>
+              <div class="t">Sesión de fotos de perfil + material visual para branding</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-week"><div class="tl-wl">Semana</div><div class="tl-wn">03</div></div>
+        <div class="tl-dot"></div>
+        <div class="tl-body">
+          <div class="tl-card">
+            <div class="tl-ct">📚 Contenido de Valor — Construir Confianza</div>
+            <div class="tasks">
+              <div class="t">VIDEO 5 — El error #1 que comete tu audiencia (y cómo evitarlo)</div>
+              <div class="t">VIDEO 6 — Tutorial o tip de alto valor — demostrar conocimiento en acción</div>
+              <div class="t">VIDEO 7 — Responder las 3 preguntas más frecuentes de tus DMs</div>
+              <div class="t">VIDEO 8 — Un resultado real: caso de éxito o transformación visible</div>
+              <div class="t">Primer teaser del producto: "Estoy preparando algo..." (sin revelar)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-week"><div class="tl-wl">Semana</div><div class="tl-wn">04</div></div>
+        <div class="tl-dot"></div>
+        <div class="tl-body">
+          <div class="tl-card">
+            <div class="tl-ct">🔥 Pre-Lanzamiento — Calentar Audiencia</div>
+            <div class="tasks">
+              <div class="t">VIDEO 9 — Encuesta en video: "¿Qué es lo que más les cuesta de [nicho]?"</div>
+              <div class="t">VIDEO 10 — El origen del producto: "Creé esto porque ustedes me pidieron..."</div>
+              <div class="t">VIDEO 11 — Objeciones en video: "Sé que se están preguntando si..."</div>
+              <div class="t">VIDEO 12 — Sneak peek: mostrar 1 módulo o un trozo del valor real</div>
+              <div class="t gold">Activar lista de espera: formulario o link de notificación</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-week"><div class="tl-wl">Semana</div><div class="tl-wn">05</div></div>
+        <div class="tl-dot gold"></div>
+        <div class="tl-body">
+          <div class="tl-card hl">
+            <div class="tl-ct">🚀 Semana de Lanzamiento</div>
+            <div class="tasks">
+              <div class="t gold">VIDEO 13 — Anuncio oficial: "Ya está disponible" + precio + CTA claro</div>
+              <div class="t gold">VIDEO 14 — Por qué creé esto (el video emocional del lanzamiento)</div>
+              <div class="t gold">VIDEO 15 — "Últimas 48h / precio de lanzamiento" — urgencia real</div>
+              <div class="t">Stories diarias: testimonios beta, Q&amp;A, manejo de objeciones</div>
+              <div class="t">Live opcional: sesión en vivo respondiendo preguntas en tiempo real</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-week"><div class="tl-wl">Semana</div><div class="tl-wn">06</div></div>
+        <div class="tl-dot green"></div>
+        <div class="tl-body">
+          <div class="tl-card">
+            <div class="tl-ct">📊 Post-Lanzamiento &amp; Escala</div>
+            <div class="tasks">
+              <div class="t green">Análisis: ventas, comentarios, objeciones que aparecieron</div>
+              <div class="t green">Recopilar primeros testimonios de compradores</div>
+              <div class="t green">Contenido post-lanzamiento: mostrar el proceso por dentro</div>
+              <div class="t">Activar contenido evergreen con los mejores scripts del roadmap</div>
+              <div class="t">Planificar Producto 02 — definir fecha y estructura</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TIPOS DE VIDEO -->
+<section id="videos" data-label="Videos" style="position:relative;z-index:2">
+  <div class="si">
+    <div class="divider"></div>
+    <div class="reveal">
+      <div class="sec-label">Mapa de contenido</div>
+      <h2 class="sec-title">Los 5 tipos de video<br>que <em>necesitas</em></h2>
+      <p class="sec-sub">Cada video tiene un trabajo diferente. Este es el mapa de qué grabar y para qué sirve cada formato.</p>
+    </div>
+    <div class="vid-grid reveal" data-d="80">
+      <div class="vc"><div class="vc-top" style="background:linear-gradient(90deg,var(--violet),var(--light-v))"></div><div class="vc-in"><div class="vc-type">Tipo 01 · Autoridad</div><div class="vc-title">Posicionamiento</div><div class="vc-desc">Tu historia, tu método, tus resultados. La audiencia nueva decide en segundos si confía.</div><div class="vc-tags"><span class="vt">Awareness</span><span class="vt">TikTok</span></div></div></div>
+      <div class="vc"><div class="vc-top" style="background:linear-gradient(90deg,var(--gold),var(--bright-g,#fbbf24))"></div><div class="vc-in"><div class="vc-type">Tipo 02 · Valor</div><div class="vc-title">Educativos</div><div class="vc-desc">Tips, tutoriales, errores comunes. Dan tanto valor gratis que la audiencia quiere el producto pago.</div><div class="vc-tags"><span class="vt">Saves</span><span class="vt">Shares</span></div></div></div>
+      <div class="vc"><div class="vc-top" style="background:linear-gradient(90deg,var(--green),#34d399)"></div><div class="vc-in"><div class="vc-type">Tipo 03 · Prueba</div><div class="vc-title">Transformación</div><div class="vc-desc">Casos reales, antes/después. El cerebro compra resultados — no productos. Estos cierran ventas.</div><div class="vc-tags"><span class="vt">Conversión</span></div></div></div>
+      <div class="vc"><div class="vc-top" style="background:linear-gradient(90deg,#ec4899,#f97316)"></div><div class="vc-in"><div class="vc-type">Tipo 04 · Conexión</div><div class="vc-title">Personales</div><div class="vc-desc">Detrás de cámaras, vulnerabilidad. La gente no compra a marcas — compra a personas en las que cree.</div><div class="vc-tags"><span class="vt">Engagement</span></div></div></div>
+      <div class="vc"><div class="vc-top" style="background:linear-gradient(90deg,#06b6d4,var(--violet))"></div><div class="vc-in"><div class="vc-type">Tipo 05 · Ventas</div><div class="vc-title">Lanzamiento</div><div class="vc-desc">Directo al producto: qué es, para quién, qué resuelve, por qué actuar ahora. CTA claro siempre.</div><div class="vc-tags"><span class="vt">Conversión</span><span class="vt">CTA</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PREPARACIÓN -->
+<section id="prep" data-label="Preparación" style="position:relative;z-index:2">
+  <div class="si">
+    <div class="divider"></div>
+    <div class="reveal">
+      <div class="sec-label">Antes de la primera sesión</div>
+      <h2 class="sec-title">Lo que necesitas<br><em>preparar</em></h2>
+      <p class="sec-sub">Reúne todo esto antes de la sesión de branding. Mientras más completo llegues, más rápido avanzamos.</p>
+    </div>
+    <div class="chk reveal" data-d="80">
+      <div>
+        <div class="chk-col-title v">Para la sesión de branding</div>
+        <div class="chk-list">
+          <div class="ci"><span class="ci-icon v">★</span>3-5 referencias visuales de marcas o creadores que te inspiran</div>
+          <div class="ci"><span class="ci-icon v">★</span>Tus 5 videos con más vistas o engagement</div>
+          <div class="ci"><span class="ci-icon v">★</span>Logo actual en cualquier formato (si tienes)</div>
+          <div class="ci"><span class="ci-icon v">★</span>Colores que ya usas o que te gustaría usar</div>
+          <div class="ci"><span class="ci-icon v">★</span>Cuestionario de onboarding completado</div>
+        </div>
+      </div>
+      <div>
+        <div class="chk-col-title g">Para las primeras grabaciones</div>
+        <div class="chk-list">
+          <div class="ci"><span class="ci-icon g">✓</span>Espacio de grabación limpio y bien iluminado</div>
+          <div class="ci"><span class="ci-icon g">✓</span>Celular cargado + trípode o apoyo estable</div>
+          <div class="ci"><span class="ci-icon g">✓</span>Micrófono (puede ser el celular con buena acústica)</div>
+          <div class="ci"><span class="ci-icon g">✓</span>2-3 outfits que usarías en contenido profesional</div>
+          <div class="ci"><span class="ci-icon g">✓</span>30-60 minutos sin interrupciones para grabar</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRÓXIMOS PASOS -->
+<section id="pasos" data-label="Próximos Pasos" style="position:relative;z-index:2">
+  <div class="si">
+    <div class="divider"></div>
+    <div class="reveal">
+      <div class="sec-label">Arrancamos ahora</div>
+      <h2 class="sec-title">Próximos<br><em>Pasos</em></h2>
+    </div>
+    <div class="steps-grid reveal" data-d="80">
+      <div class="sc"><div class="sc-num">01</div><h3>Cuestionario</h3><p>Llena el formulario de onboarding que te enviamos. Es el punto de partida para el branding.</p></div>
+      <div class="sc"><div class="sc-num">02</div><h3>Enviar a Vanta</h3><p>Manda tus respuestas + referencias visuales a Vanta por WhatsApp o email.</p></div>
+      <div class="sc"><div class="sc-num">03</div><h3>Sesión Branding</h3><p>60-90 min para definir tu identidad visual, voz y el sistema de tu marca.</p></div>
+      <div class="sc"><div class="sc-num">04</div><h3>Primer Video</h3><p>Semana 2 grabamos los primeros 4 videos de autoridad. El motor arranca.</p></div>
+    </div>
+
+    <div class="cta-box reveal" data-d="120">
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(1.8rem,4vw,3rem);color:#fff;margin-bottom:14px">¿Lista para <em style="color:var(--light-v);font-style:italic">empezar</em>?</h2>
+      <p style="color:var(--muted);font-size:.9rem;margin-bottom:28px">Escríbenos cuando tengas el cuestionario listo y agendamos la sesión.</p>
+      <a href="https://wa.me/TUNUMERO?text=Hola%20Vanta%2C%20ya%20completé%20el%20onboarding" class="btn btn-g">📲 WhatsApp</a>
+      <a href="mailto:main@vantalabel.com" class="btn btn-v">✉️ Email</a>
+    </div>
+  </div>
+</section>
+
+<footer>Preparado por <span>Vanta</span> para Maryvic León · Paquete Crecimiento $2,500</footer>
+
+<script>
+const pb=document.getElementById('pb');
+window.addEventListener('scroll',()=>{const s=document.documentElement;pb.style.width=((s.scrollTop/(s.scrollHeight-s.clientHeight))*100)+'%'});
+const sf=document.getElementById('stars');
+for(let i=0;i<120;i++){const s=document.createElement('div');s.className='star';s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;--dur:${(Math.random()*4+2).toFixed(1)}s;--delay:-${(Math.random()*6).toFixed(1)}s;--hi:${(Math.random()*.5+.2).toFixed(2)}`;sf.appendChild(s)}
+const sn=document.getElementById('sn');
+const secs=document.querySelectorAll('section[id]');
+secs.forEach(s=>{const a=document.createElement('a');a.href='#'+s.id;a.title=s.dataset.label||s.id;sn.appendChild(a)});
+window.addEventListener('scroll',()=>{let cur='';secs.forEach(s=>{if(s.offsetTop<=window.scrollY+250)cur=s.id});sn.querySelectorAll('a').forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+cur)})});
+const ro=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('in')})},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>{if(el.dataset.d)el.style.transitionDelay=el.dataset.d+'ms';ro.observe(el)});
+</script>
+</body>
+</html>
